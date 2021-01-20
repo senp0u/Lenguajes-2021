@@ -1,0 +1,10 @@
+Tiempo hasta el 20 de marzo
+
+BD MSSQL
+Server Name: sql5101.site4now.net
+User: DB_A6E1ED_lenguajes_admin
+Password: lenguajes3
+
+////////////////////////////////
+Pasos para la segunda BD, la crea otro del grupo
+https://www.youtube.com/watch?v=jC2YzafUpT0
