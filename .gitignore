@@ -1,3 +1,7 @@
 /HelpDesk-Support/HelpDesk-SupportAPI/bin/*
 /HelpDesk-Support/HelpDesk-SupportAPI/obj/*
 /HelpDesk-Support/.vs/*
+/HelpDesk-Support/HelpDesk-SupportMVC/bin/*
+/HelpDesk-Support/HelpDesk-SupportMVC/obj/*
+/HelpDesk-Support/HelpDesk-SupportMVC/obj/Debug/netcoreapp3.1/HelpDesk-SupportMVC.csprojAssemblyReference.cache
+
