@@ -15,23 +15,23 @@ namespace HelpDesk_SupportAPI.Controllers
     {
         private readonly DB_A6E1ED_lenguajesContext _context;
 
-        public EmployeeController(DB_A6E1ED_lenguajesContext context)
+        public EmployeeController()
         {
-            _context = context;
+            _context = new DB_A6E1ED_lenguajesContext();
         }
 
         // GET: api/Employee
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
-            return await _context.Employees.ToListAsync();
+            return await _context.Employee.ToListAsync();
         }
 
         // GET: api/Employee/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employee.FindAsync(id);
 
             if (employee == null)
             {
@@ -79,7 +79,7 @@ namespace HelpDesk_SupportAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
-            _context.Employees.Add(employee);
+            _context.Employee.Add(employee);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
@@ -89,13 +89,13 @@ namespace HelpDesk_SupportAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employee.FindAsync(id);
             if (employee == null)
             {
                 return NotFound();
             }
 
-            _context.Employees.Remove(employee);
+            _context.Employee.Remove(employee);
             await _context.SaveChangesAsync();
 
             return employee;
@@ -103,7 +103,7 @@ namespace HelpDesk_SupportAPI.Controllers
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(e => e.EmployeeId == id);
+            return _context.Employee.Any(e => e.EmployeeId == id);
         }
     }
 }
