@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Josue\\Desktop\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\HelpDesk-SupportAPI.csproj": {}
+    "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support app\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\HelpDesk-SupportAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Josue\\Desktop\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\HelpDesk-SupportAPI.csproj": {
+    "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support app\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\HelpDesk-SupportAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Josue\\Desktop\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\HelpDesk-SupportAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support app\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\HelpDesk-SupportAPI.csproj",
         "projectName": "HelpDesk-SupportAPI",
-        "projectPath": "C:\\Users\\Josue\\Desktop\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\HelpDesk-SupportAPI.csproj",
-        "packagesPath": "C:\\Users\\Josue\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Josue\\Desktop\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\obj\\",
+        "projectPath": "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support app\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\HelpDesk-SupportAPI.csproj",
+        "packagesPath": "C:\\Users\\Paula\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support app\\Lenguajes-2021\\HelpDesk-Support\\HelpDesk-SupportAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Paula\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,7 +29,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,7 +40,26 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -60,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.111\\RuntimeIdentifierGraph.json"
         }
       }
     }
