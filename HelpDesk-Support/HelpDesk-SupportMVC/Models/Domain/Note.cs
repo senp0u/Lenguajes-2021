@@ -11,11 +11,11 @@ namespace HelpDesk_SupportMVC.Models.Domain
         private string description;
         private DateTime noteDate;
         private int reportNumber;
-        private int employeeId;
+        private int? employeeId;
         private int createBy;
-        private int modifyBy;
+        private int? modifyBy;
         private DateTime createDate;
-        private DateTime modifyDate;
+        private DateTime? modifyDate;
 
         private Employee employee;
         private Issue reportNumberNavigation;
@@ -41,11 +41,11 @@ namespace HelpDesk_SupportMVC.Models.Domain
         public string Description { get => description; set => description = value; }
         public DateTime NoteDate { get => noteDate; set => noteDate = value; }
         public int ReportNumber { get => reportNumber; set => reportNumber = value; }
-        public int EmployeeId { get => employeeId; set => employeeId = value; }
+        public int? EmployeeId { get => employeeId; set => employeeId = value; }
         public int CreateBy { get => createBy; set => createBy = value; }
-        public int ModifyBy { get => modifyBy; set => modifyBy = value; }
+        public int? ModifyBy { get => modifyBy; set => modifyBy = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
-        public DateTime ModifyDate { get => modifyDate; set => modifyDate = value; }
+        public DateTime? ModifyDate { get => modifyDate; set => modifyDate = value; }
         public Employee Employee { get => employee; set => employee = value; }
         public Issue ReportNumberNavigation { get => reportNumberNavigation; set => reportNumberNavigation = value; }
 

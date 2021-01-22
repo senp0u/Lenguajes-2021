@@ -10,9 +10,9 @@ namespace HelpDesk_SupportMVC.Models.Domain
         private int serviceId;
         private string name;
         private int createBy;
-        private int modifyBy;
+        private int? modifyBy;
         private DateTime createDate;
-        private DateTime modifyDate;
+        private DateTime? modifyDate;
 
         private ICollection<EmployeeService> employeeServices;
         private ICollection<Issue> issues;
@@ -33,9 +33,9 @@ namespace HelpDesk_SupportMVC.Models.Domain
         public int ServiceId { get => serviceId; set => serviceId = value; }
         public string Name { get => name; set => name = value; }
         public int CreateBy { get => createBy; set => createBy = value; }
-        public int ModifyBy { get => modifyBy; set => modifyBy = value; }
+        public int? ModifyBy { get => modifyBy; set => modifyBy = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
-        public DateTime ModifyDate { get => modifyDate; set => modifyDate = value; }
+        public DateTime? ModifyDate { get => modifyDate; set => modifyDate = value; }
         public ICollection<EmployeeService> EmployeeServices { get => employeeServices; set => employeeServices = value; }
         public ICollection<Issue> Issues { get => issues; set => issues = value; }
     }
