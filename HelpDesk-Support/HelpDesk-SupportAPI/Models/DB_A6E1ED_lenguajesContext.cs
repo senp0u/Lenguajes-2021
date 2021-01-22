@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
 
 namespace HelpDesk_SupportAPI.Models
 {
@@ -17,29 +19,25 @@ namespace HelpDesk_SupportAPI.Models
         {
         }
 
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<EmployeeService> EmployeeServices { get; set; }
-        public virtual DbSet<Issue> Issues { get; set; }
-        public virtual DbSet<Note> Notes { get; set; }
-        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<EmployeeService> EmployeeService { get; set; }
+        public virtual DbSet<Issue> Issue { get; set; }
+        public virtual DbSet<Notes> Notes { get; set; }
+        public virtual DbSet<Service> Service { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=sql5101.site4now.net;Initial Catalog=DB_A6E1ED_lenguajes;;User ID=DB_A6E1ED_lenguajes_admin;Password=lenguajes3");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<Employee>(entity =>
             {
-                entity.ToTable("Employee");
-
                 entity.Property(e => e.CreateDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
@@ -55,6 +53,8 @@ namespace HelpDesk_SupportAPI.Models
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(25);
+
+                entity.Property(e => e.Password).HasMaxLength(25);
 
                 entity.Property(e => e.SecondSurname)
                     .IsRequired()
@@ -72,20 +72,18 @@ namespace HelpDesk_SupportAPI.Models
                 entity.HasKey(e => new { e.EmployeeId, e.ServiceId })
                     .HasName("Employee_Service_PK");
 
-                entity.ToTable("EmployeeService");
-
                 entity.Property(e => e.CreateDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifyDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.EmployeeServices)
+                    .WithMany(p => p.EmployeeService)
                     .HasForeignKey(d => d.EmployeeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Employee_Service_FK1");
 
                 entity.HasOne(d => d.Service)
-                    .WithMany(p => p.EmployeeServices)
+                    .WithMany(p => p.EmployeeService)
                     .HasForeignKey(d => d.ServiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Employee_Service_FK2");
@@ -95,8 +93,6 @@ namespace HelpDesk_SupportAPI.Models
             {
                 entity.HasKey(e => e.ReportNumber)
                     .HasName("PK__Issue__5A964EF99F589D49");
-
-                entity.ToTable("Issue");
 
                 entity.Property(e => e.Classification)
                     .IsRequired()
@@ -117,27 +113,24 @@ namespace HelpDesk_SupportAPI.Models
                     .HasMaxLength(12);
 
                 entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.IssueEmployees)
+                    .WithMany(p => p.IssueEmployee)
                     .HasForeignKey(d => d.EmployeeId)
                     .HasConstraintName("Employee_FK");
 
                 entity.HasOne(d => d.Service)
-                    .WithMany(p => p.Issues)
+                    .WithMany(p => p.Issue)
                     .HasForeignKey(d => d.ServiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Service_FK");
 
                 entity.HasOne(d => d.Supervisor)
-                    .WithMany(p => p.IssueSupervisors)
+                    .WithMany(p => p.IssueSupervisor)
                     .HasForeignKey(d => d.SupervisorId)
                     .HasConstraintName("Supervisor_FK2");
             });
 
-            modelBuilder.Entity<Note>(entity =>
+            modelBuilder.Entity<Notes>(entity =>
             {
-                entity.HasKey(e => e.NotesId)
-                    .HasName("PK__Notes__35AB5BAA76F55E1F");
-
                 entity.Property(e => e.CreateDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Description)
@@ -162,9 +155,8 @@ namespace HelpDesk_SupportAPI.Models
 
             modelBuilder.Entity<Service>(entity =>
             {
-                entity.ToTable("Service");
-
-                entity.HasIndex(e => e.Name, "UQ__Service__737584F6B9950E96")
+                entity.HasIndex(e => e.Name)
+                    .HasName("UQ__Service__737584F6B9950E96")
                     .IsUnique();
 
                 entity.Property(e => e.CreateDate).HasColumnType("datetime");
