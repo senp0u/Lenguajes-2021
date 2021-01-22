@@ -5,12 +5,12 @@
 
 //this function loads the website
 $(document).ready(function () {
-   
+    LoadData();
 });
 
 function LoadData() {
     $.ajax({
-        url: "/Home/GetIssues",
+        url: "/Issue/GetIssues",
         type: "GET",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
@@ -18,12 +18,12 @@ function LoadData() {
             var html = '';
             $.each(result, function (key, item) {
                 html += '<tr>';
-                html += '<td>' + item.ReportNumber + '</td>';
-                html += '<td>' + item.Classification + '</td>';
-                html += '<td>' + item.Status + '</td>';
-                html += '<td>' + item.ReportDate + '</td>';
-                html += '<td>' + item.ResolutionComment + '</td>';
-                html += '<td>' + item.ServiceId + '</td>';
+                html += '<td>' + item.reportNumber + '</td>';
+                html += '<td>' + item.classification + '</td>';
+                html += '<td>' + item.status + '</td>';
+                html += '<td>' + item.reportDate + '</td>';
+                html += '<td>' + item.resolutionComment + '</td>';
+                html += '<td>' + item.serviceId + '</td>';
                 html += '<td><a href="#openModal" onclick="return GetById(' + item.ReportNumber + ')">Edit</a> | <a href="#modalDelete" onclick="Delete(' + item.ReportNumber + ')">Delete</a></td>';
             });
             $('.tbody').html(html);
