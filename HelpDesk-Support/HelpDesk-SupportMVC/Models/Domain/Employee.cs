@@ -17,9 +17,9 @@ namespace HelpDesk_SupportMVC.Models.Domain
         private bool isSupervisor;
         private int supervisorId;
         private int createBy;
-        private int modifyBy;
+        private int? modifyBy;
         private DateTime createDate;
-        private DateTime modifyDate;
+        private DateTime? modifyDate;
 
         private Employee supervisor;
         private ICollection<EmployeeService> employeeServices;
@@ -62,9 +62,9 @@ namespace HelpDesk_SupportMVC.Models.Domain
         public bool IsSupervisor { get => isSupervisor; set => isSupervisor = value; }
         public int SupervisorId { get => supervisorId; set => supervisorId = value; }
         public int CreateBy { get => createBy; set => createBy = value; }
-        public int ModifyBy { get => modifyBy; set => modifyBy = value; }
+        public int? ModifyBy { get => modifyBy; set => modifyBy = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
-        public DateTime ModifyDate { get => modifyDate; set => modifyDate = value; }
+        public DateTime? ModifyDate { get => modifyDate; set => modifyDate = value; }
         public Employee Supervisor { get => supervisor; set => supervisor = value; }
         public ICollection<EmployeeService> EmployeeServices { get => employeeServices; set => employeeServices = value; }
         public ICollection<Employee> InverseSupervisor { get => inverseSupervisor; set => inverseSupervisor = value; }
