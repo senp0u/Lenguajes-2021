@@ -12,13 +12,13 @@ namespace HelpDesk_SupportMVC.Models.Domain
         private string status;
         private DateTime reportDate;
         private string resolutionComment;
-        private int employeeId;
-        private int supervisorId;
+        private int? employeeId;
+        private int? supervisorId;
         private int serviceId;
         private int createBy;
-        private int modifyBy;
+        private int? modifyBy;
         private DateTime createDate;
-        private DateTime modifyDate;
+        private DateTime? modifyDate;
 
         private Employee employee;
         private Service service;
@@ -45,20 +45,20 @@ namespace HelpDesk_SupportMVC.Models.Domain
             this.Notes = notes;
         }
 
-        public Issue() { }
+        public Issue() {}
 
         public int ReportNumber { get => reportNumber; set => reportNumber = value; }
         public string Classification { get => classification; set => classification = value; }
         public string Status { get => status; set => status = value; }
         public DateTime ReportDate { get => reportDate; set => reportDate = value; }
         public string ResolutionComment { get => resolutionComment; set => resolutionComment = value; }
-        public int EmployeeId { get => employeeId; set => employeeId = value; }
-        public int SupervisorId { get => supervisorId; set => supervisorId = value; }
+        public int? EmployeeId { get => employeeId; set => employeeId = value; }
+        public int? SupervisorId { get => supervisorId; set => supervisorId = value; }
         public int ServiceId { get => serviceId; set => serviceId = value; }
         public int CreateBy { get => createBy; set => createBy = value; }
-        public int ModifyBy { get => modifyBy; set => modifyBy = value; }
+        public int? ModifyBy { get => modifyBy; set => modifyBy = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
-        public DateTime ModifyDate { get => modifyDate; set => modifyDate = value; }
+        public DateTime? ModifyDate { get => modifyDate; set => modifyDate = value; }
         public Employee Employee { get => employee; set => employee = value; }
         public Service Service { get => service; set => service = value; }
         public Employee Supervisor { get => supervisor; set => supervisor = value; }

@@ -15,23 +15,23 @@ namespace HelpDesk_SupportAPI.Controllers
     {
         private readonly DB_A6E1ED_lenguajesContext _context;
 
-        public IssueController(DB_A6E1ED_lenguajesContext context)
+        public IssueController()
         {
-            _context = context;
+            _context = new DB_A6E1ED_lenguajesContext();
         }
 
         // GET: api/Issue
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Issue>>> GetIssues()
+        public async Task<ActionResult<IEnumerable<Issue>>> GetIssue()
         {
-            return await _context.Issues.ToListAsync();
+            return await _context.Issue.ToListAsync();
         }
 
         // GET: api/Issue/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Issue>> GetIssue(int id)
         {
-            var issue = await _context.Issues.FindAsync(id);
+            var issue = await _context.Issue.FindAsync(id);
 
             if (issue == null)
             {
@@ -79,7 +79,7 @@ namespace HelpDesk_SupportAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Issue>> PostIssue(Issue issue)
         {
-            _context.Issues.Add(issue);
+            _context.Issue.Add(issue);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetIssue", new { id = issue.ReportNumber }, issue);
@@ -89,13 +89,13 @@ namespace HelpDesk_SupportAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Issue>> DeleteIssue(int id)
         {
-            var issue = await _context.Issues.FindAsync(id);
+            var issue = await _context.Issue.FindAsync(id);
             if (issue == null)
             {
                 return NotFound();
             }
 
-            _context.Issues.Remove(issue);
+            _context.Issue.Remove(issue);
             await _context.SaveChangesAsync();
 
             return issue;
@@ -103,7 +103,7 @@ namespace HelpDesk_SupportAPI.Controllers
 
         private bool IssueExists(int id)
         {
-            return _context.Issues.Any(e => e.ReportNumber == id);
+            return _context.Issue.Any(e => e.ReportNumber == id);
         }
     }
 }
