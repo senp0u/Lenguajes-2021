@@ -72,13 +72,24 @@ function AddEmployee() {
         dataType: "json",
         success: function (result) {
             document.getElementById('name').value = '';
+            document.getElementById('first-surname').value = '';
+            document.getElementById('second-surname').value = '';
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
             LoadData();
+            ShowLabel('message');
+            document.getElementById('message').innerHTML = 'El Empleado se registró exitosamente';
         },
         error: function (errorMessage) {
-            alert(errorMessage.responseText);
+            ShowLabel('message');
+            document.getElementById('message').innerHTML = 'El Empleado no se logró registrar';
         }
     });
+
+}
+
+function ShowLabel(id) {
+
+    document.getElementById(id).style.visibility = "visible";
 
 }
