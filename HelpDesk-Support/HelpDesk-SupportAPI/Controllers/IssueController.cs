@@ -24,7 +24,8 @@ namespace HelpDesk_SupportAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Issue>>> GetIssue()
         {
-            return await _context.Issue.ToListAsync();
+            return await _context.Issue.Include(i => i.Service).ToListAsync();
+            //return await _context.Issue.ToListAsync();
         }
 
         // GET: api/Issue/5
