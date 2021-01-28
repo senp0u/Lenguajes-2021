@@ -6,6 +6,7 @@
 //this function loads the website
 $(document).ready(function () {
     LoadData();
+    GetServices();
 });
 
 function LoadData() {
@@ -36,39 +37,78 @@ function LoadData() {
 
 }
 
+function GetServices() {
+    $.ajax({
+        url: "/Service/GetServices",
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+
+            $.each(result, function (key, item) {
+                $("#option-services").append('<option value=' + item.serviceId + '>' + item.name + '</option>');
+            });
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    })
+}
+
 function AddEmployee() {
+    let isSupervisor = false;
+    var ServiceList = [{
+        //employeeId = 2
+        serviceId: 1,
+        createBy: 3,
+        createDate: "2004-05-23T14:25:10"
+        }];
+
+    if ($('#is-supervisor').val()=="Si") {
+        isSupervisor = true;
+    }
 
     var employee = {
 
         name: $('#name').val(),
-        firstsurname: $('#first-surname').val(),
-        secondsurname: $('#second-surname').val(),
+        firstSurname: $('#first-surname').val(),
+        secondSurname: $('#second-surname').val(),
         email: $('#email').val(),
-        supervisor: $('#option-supervisor').val(),
-        issupervisor: $('#is-supervisor').val(),
-        o1: $('#o1').val(),
-        o2: $('#o2').val(),
-        o3: $('#o3').val(),
-        o4: $('#o4').val()
-
+        supervisorId:3,
+        isSupervisor: isSupervisor,
+        employeeServices: ServiceList,
+        password: $('#password').val(),
+        createBy: 3,
+        createDate: "2004-05-23T14:25:10"
 
     };
 
     $.ajax({
-        url: "/Home/Insert",
-        data: JSON.stringify(student),
+        url: "/Employee/PostEmployee",
+        data: JSON.stringify(employee),
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
             document.getElementById('name').value = '';
+            document.getElementById('first-surname').value = '';
+            document.getElementById('second-surname').value = '';
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
             LoadData();
+            ShowLabel('message');
+            document.getElementById('message').innerHTML = 'El Empleado se registró exitosamente';
         },
         error: function (errorMessage) {
-            alert(errorMessage.responseText);
+            ShowLabel('message');
+            document.getElementById('message').innerHTML = 'El Empleado no se logró registrar';
         }
     });
+
+}
+
+function ShowLabel(id) {
+
+    document.getElementById(id).style.visibility = "visible";
 
 }

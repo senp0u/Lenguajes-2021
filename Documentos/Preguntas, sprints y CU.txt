@@ -1,0 +1,58 @@
+Preguntas:
+ASP Net Core webapp //tiene frontent diferencia ASP Net Core //esta es api
+
+Cronograma: Exactamente que se refiere con cronograma o podemos trabajar 
+con sprits. //agregar al profe.
+
+//utilizar pista de auditoria:
+quien la crea
+cuando la creo
+la ultima modificación
+usuario
+
+---
+EL primer usuario supervisor quien lo registra. Quien es. 
+--Primer supervisor: un super usuario, no se elimina. Unico en el sistema
+
+--Que hace el usuario supervisor: asignarlos, atender caso (valorar)
+
+--Cual es la cantidad minima o maxima de servicios que se le puede asignar a un
+soportista: minimo uno 1  y maximo: mN
+
+--En la lista de solicitudes, se visualizan todas, independientemente de 
+su estado? --prioridad: por atender
+
+
+Usuarios
+  CU1 - Registrar usuarios de clientes.
+  CU2 – Autenticarse en la aplicación
+  CU3 - Salir de la aplicación.
+  CU4 - Ingresar solicitud.
+
+
+Soporte
+  CU7 - Registrar usuarios de soporte
+  CU8 - Ingresar usuarios de soporte a la aplicación.
+  CU9 - Salir de la aplicación.  
+  CU10 - Mostrar solicitudes registradas.
+  CU13- Registro de Notas técnicas a la solicitud.
+
+Ambos
+  CU5 - Consultar solicitudes para usuarios clientes.
+  CU6 - Agregar comentarios a la solicitud.
+  CU11 - Asignación de solicitudes a soportistas.
+  CU12 - Iniciar proceso para solicitudes.
+  CU14 - Registro de comentarios a la solicitud.
+  CU15 - Resolver solicitud.
+
+
+SPRING 1
+  CU7 - Registrar usuarios de soporte (incompleto)
+  CU10 - Mostrar solicitudes registradas. (incompleto)
+
+SPRING 2
+  CU7 - Registrar usuarios de soporte (completo)
+  CU10 - Mostrar solicitudes registradas. (completo)
+  CU8 - Ingresar usuarios de soporte a la aplicación. (Autenticarse)
+  CU9 - Salir de la aplicación.  
+
