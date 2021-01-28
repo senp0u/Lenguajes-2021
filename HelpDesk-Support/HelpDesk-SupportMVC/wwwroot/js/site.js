@@ -6,7 +6,6 @@
 //this function loads the website
 $(document).ready(function () {
     LoadData();
-    GetServices();
 });
 
 function LoadData() {
@@ -35,24 +34,6 @@ function LoadData() {
         }
     })
 
-}
-
-function GetServices(){
-    $.ajax({
-        url: "/Service/GetServices",
-        type: "GET",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-           
-            $.each(result, function (key, item) {
-                $("#option-services").append('<option value=' + item.serviceId + '>' + item.name + '</option>');
-            });   
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    })
 }
 
 function AddEmployee() {
