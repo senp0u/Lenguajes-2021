@@ -1,48 +1,242 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HelpDesk_SupportMVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="~/images/supporter.png" />
+
+    <title>Soporte técnico</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.css">
+
+    <link rel="stylesheet" href="~/css/templatemo-breezed.css">
+
+    <link rel="stylesheet" href="~/css/owl-carousel.css">
+
+    <link rel="stylesheet" href="~/css/lightbox.css">
+
 </head>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HelpDesk_SupportMVC</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="#top" class="logo">
+                            TeleAtlántico
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top">Inicio</a></li>
+                            <li class="scroll-to-section"><a href="#issue">Solicitudes</a></li>
+                            <li class="scroll-to-section"><a href="#add-supporter">Soportista(+)</a></li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - HelpDesk_SupportMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    </header>
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner header-text" id="top">
+
+        <div class="item">
+            <div>
+                <div class="img-fill">
+                    <img src="~/images/slide-02.jpg" alt="">
+                    <div class="text-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- ISSUE -->
+    <section id="issue">
+        <div class="container">
+            <div class="row">
+                <div class="section-title">
+                    <h2>Solicitudes</h2><br>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="table">
+
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Clasificación
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Fecha
+                                    </th>
+                                    <th>
+                                        Comentario
+                                    </th>
+                                    <th>
+                                        Servicio
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <section class="section" id="add-supporter">
+        <div class="container">
+            <div class="row">
+                <div class="section-title">
+                    <h2>Agregar Soportista</h2><br>
+                    <h3 id="message" style="visibility:hidden;"></h3>
+                </div>
+                <div class="contact-form">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <fieldset>
+                                <input name="name" type="text" id="name" placeholder="Nombre" required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <fieldset>
+                                <input name="first-surname" type="text" id="first-surname" placeholder="Apellido 1" required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <fieldset>
+                                <input name="second-surname" type="text" id="second-surname" placeholder="Apellido 2" required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <fieldset>
+                                <input name="email" type="email" id="email" placeholder="Email" required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <fieldset>
+                                <input name="password" type="password" id="password" placeholder="Contraseña" required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-md-2 col-sm-12">
+                            <fieldset>
+                                <label for="is-supervisor">Es Supervisor:</label><br>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-2 col-sm-12">
+                            <fieldset>
+                                <select name="is-supervisor" id="is-supervisor" class="form-control">
+                                    <option value="Si">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+
+                            </fieldset>
+                        </div>
+                        <div class="col-md-1 col-sm-12">
+                            <fieldset>
+                                <label for="option-supervisor">Supervisor:</label><br>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-5 col-sm-12">
+                            <fieldset>
+                                <select name="option-supervisor" id="option-supervisor" class="form-control">
+                                    <option>Nombre1</option>
+                                    <option>Nombre2</option>
+                                </select>
+
+                            </fieldset>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-12">
+                    <fieldset>
+                        <label for="service">Servicios asignados:</label>
+                    </fieldset>
+                </div>
+                <div class="col-md-5 col-sm-12">
+                    <fieldset>
+                        <select name="option-services" id="option-services" class="form-control"></select>
+                    </fieldset>
+                </div>
+
+                <div class="contact-form">
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <button class="submit-btn form-control" id="add-supporter-btn" onclick="AddEmployee()">Registrar</button>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <button class="submit-btn form-control" id="clear-supporter-btn" onclick="">Limpiar</button>
+                </div>
+            </div>
+            </div>
+    </section>
+
+
+
+    <!-- jQuery -->
+    <script src="~/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="~/js/owl-carousel.js"></script>
+    <script src="~/js/scrollreveal.min.js"></script>
+    <script src="~/js/waypoints.min.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/imgfix.min.js"></script>
+    <script src="~/js/slick.js"></script>
+    <script src="~/js/lightbox.js"></script>
+    <script src="~/js/isotope.js"></script>
+    <script src="~/js/site.js"></script>
+
+
+    <!-- Global Init -->
+    <script src="~/js/custom.js"></script>
 </body>
 </html>
