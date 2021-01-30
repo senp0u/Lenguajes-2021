@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,16 +35,6 @@
 
 <body>
 
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <!-- ***** Preloader End ***** -->
-    <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
             <div class="row">
@@ -56,7 +49,10 @@
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top">Inicio</a></li>
                             <li class="scroll-to-section"><a href="#issue">Solicitudes</a></li>
-                            <li class="scroll-to-section"><a href="#add-supporter">Soportista(+)</a></li>
+                            @if (@HttpContextAccessor.HttpContext.Session.GetInt32("isSupervisor") != 0)
+                            {
+                                <li class="scroll-to-section"><a href="#add-supporter">Soportista(+)</a></li>
+                            }
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -127,116 +123,119 @@
         </div>
     </section>
     <br>
-    <section class="section" id="add-supporter">
-        <div class="container">
-            <div class="row">
-                <div class="section-title">
-                    <h2>Agregar Soportista</h2><br>
-                    <h3 id="message" style="visibility:hidden;"></h3>
-                </div>
-                <div class="contact-form">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-12">
-                            <fieldset>
-                                <input name="name" type="text" id="name" placeholder="Nombre" required="">
-                            </fieldset>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <fieldset>
-                                <input name="first-surname" type="text" id="first-surname" placeholder="Apellido 1" required="">
-                            </fieldset>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <fieldset>
-                                <input name="second-surname" type="text" id="second-surname" placeholder="Apellido 2" required="">
-                            </fieldset>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <fieldset>
-                                <input name="email" type="email" id="email" placeholder="Email" required="">
-                            </fieldset>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <fieldset>
-                                <input name="password" type="password" id="password" placeholder="Contraseña" required="">
-                            </fieldset>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <fieldset>
-                                <label for="is-supervisor">Es Supervisor:</label><br>
-                            </fieldset>
-                        </div>
-                        <div class="col-md-2 col-sm-12">
-                            <fieldset>
-                                <select name="is-supervisor" id="is-supervisor" class="form-control">
-                                    <option value="Si">Sí</option>
-                                    <option value="No">No</option>
-                                </select>
+    @if (@HttpContextAccessor.HttpContext.Session.GetInt32("isSupervisor") != 0)
+    {
+        <section class="section" id="add-supporter">
+            <div class="container">
+                <div class="row">
+                    <div class="section-title">
+                        <h2>Agregar Soportista</h2><br>
+                        <h3 id="message" style="visibility:hidden;"></h3>
+                    </div>
+                    <div class="contact-form">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                    <input name="name" type="text" id="name" placeholder="Nombre" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                    <input name="first-surname" type="text" id="first-surname" placeholder="Apellido 1" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                    <input name="second-surname" type="text" id="second-surname" placeholder="Apellido 2" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                    <input name="email" type="email" id="email" placeholder="Email" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                    <input name="password" type="password" id="password" placeholder="Contraseña" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <fieldset>
+                                    <label for="is-supervisor">Es Supervisor:</label><br>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <fieldset>
+                                    <select name="is-supervisor" id="is-supervisor" class="form-control">
+                                        <option value="Si">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
 
-                            </fieldset>
-                        </div>
-                        <div class="col-md-1 col-sm-12">
-                            <fieldset>
-                                <label for="option-supervisor">Supervisor:</label><br>
-                            </fieldset>
-                        </div>
-                        <div class="col-md-5 col-sm-12">
-                            <fieldset>
-                                <select name="option-supervisor" id="option-supervisor" class="form-control">
-                                    <option>Nombre1</option>
-                                    <option>Nombre2</option>
-                                </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-1 col-sm-12">
+                                <fieldset>
+                                    <label for="option-supervisor">Supervisor:</label><br>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-5 col-sm-12">
+                                <fieldset>
+                                    <select name="option-supervisor" id="option-supervisor" class="form-control">
+                                        <option>Nombre1</option>
+                                        <option>Nombre2</option>
+                                    </select>
 
-                            </fieldset>
-                        </div>
+                                </fieldset>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12">
+                        <fieldset>
+                            <label for="service">Servicios asignados:</label>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-5 col-sm-12">
+                        <fieldset>
+                            <select name="option-services" id="option-services" class="form-control"></select>
+                        </fieldset>
+                    </div>
+
+                    <div class="contact-form">
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <button class="submit-btn form-control" id="add-supporter-btn" onclick="AddEmployee()">Registrar</button>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <button class="submit-btn form-control" id="clear-supporter-btn" onclick="">Limpiar</button>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-12">
-                    <fieldset>
-                        <label for="service">Servicios asignados:</label>
-                    </fieldset>
-                </div>
-                <div class="col-md-5 col-sm-12">
-                    <fieldset>
-                        <select name="option-services" id="option-services" class="form-control"></select>
-                    </fieldset>
-                </div>
-
-                <div class="contact-form">
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <button class="submit-btn form-control" id="add-supporter-btn" onclick="AddEmployee()">Registrar</button>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <button class="submit-btn form-control" id="clear-supporter-btn" onclick="">Limpiar</button>
-                </div>
             </div>
-            </div>
-    </section>
+        </section>
+    }
 
 
 
-    <!-- jQuery -->
-    <script src="~/js/jquery-2.1.0.min.js"></script>
+        <!-- jQuery -->
+        <script src="~/js/jquery-2.1.0.min.js"></script>
 
-    <!-- Bootstrap -->
-    <script src="~/js/popper.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="~/js/popper.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
 
-    <!-- Plugins -->
-    <script src="~/js/owl-carousel.js"></script>
-    <script src="~/js/scrollreveal.min.js"></script>
-    <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/jquery.counterup.min.js"></script>
-    <script src="~/js/imgfix.min.js"></script>
-    <script src="~/js/slick.js"></script>
-    <script src="~/js/lightbox.js"></script>
-    <script src="~/js/isotope.js"></script>
-    <script src="~/js/site.js"></script>
+        <!-- Plugins -->
+        <script src="~/js/owl-carousel.js"></script>
+        <script src="~/js/scrollreveal.min.js"></script>
+        <script src="~/js/waypoints.min.js"></script>
+        <script src="~/js/jquery.counterup.min.js"></script>
+        <script src="~/js/imgfix.min.js"></script>
+        <script src="~/js/slick.js"></script>
+        <script src="~/js/lightbox.js"></script>
+        <script src="~/js/isotope.js"></script>
+        <script src="~/js/site.js"></script>
 
 
-    <!-- Global Init -->
-    <script src="~/js/custom.js"></script>
-</body>
+        <!-- Global Init -->
+        <script src="~/js/custom.js"></script>
+    </body>
 </html>
