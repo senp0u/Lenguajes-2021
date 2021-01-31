@@ -24,6 +24,8 @@ namespace HelpDesk_SupportMVC.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("name", "");
+            HttpContext.Session.SetInt32("isSupervisor", 0);
             return View();
         }
 
