@@ -113,5 +113,14 @@ namespace HelpDesk_SupportAPI.Controllers
         {
             return _context.Employee.Any(e => e.EmployeeId == id);
         }
+
+        [Route("[action]/email={email}&password={password}")]
+        [HttpGet]
+        public Employee GetEmployeeToAuthenticate(string email, string password)
+        {
+            var employee = _context.Employee.Where(a => a.Email.Equals(email) && a.Password.Equals(password)).Single();
+
+            return employee;
+        }
     }
 }
