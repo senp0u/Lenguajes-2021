@@ -25,16 +25,37 @@ function LoadData() {
                 html += '<td>' + item.reportDate + '</td>';
                 html += '<td>' + item.resolutionComment + '</td>';
                 html += '<td>' + item.serviceId + '</td>';
-                html += '<td><a href="#openModal" onclick="return GetById(' + item.ReportNumber + ')">Edit</a> | <a href="#modalDelete" onclick="Delete(' + item.ReportNumber + ')">Delete</a></td>';
+                html += '<td><a href="#openModal" onclick="return GetById(' + item.ReportNumber + ')">Asignar</a></td>';
             });
             $('.tbody').html(html);
-
+            TableLanguage();
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
         }
     })
 
+}
+
+function TableLanguage() {
+    $('#table').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "No encontrado, siga intentando",
+            "info": "Mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "loadingRecords": "Cargando...",
+            "search": "Buscar: ",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        "pagingType": "full_numbers"
+    });
 }
 
 function GetServices() {

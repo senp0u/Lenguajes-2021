@@ -26,6 +26,8 @@
 
     <link rel="stylesheet" href="~/css/lightbox.css">
 
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css">
+
 </head>
 <div class="container">
     <main role="main" class="pb-3">
@@ -53,10 +55,10 @@
                             {
                                 <li class="scroll-to-section"><a href="#add-supporter">Soportista(+)</a></li>
                             }
-                        <div class="search-icon">
-                            <a onclick="location.href='@Url.Action("Index", "Employee")'"><i class="fa fa-sign-out"></i></a>
-                            <!--<input type="button" class="fa fa-sign-out" value="Cerrar Sesión" onclick="location.href='@Url.Action("Index", "Employee")'" />-->
-                        </div>
+                            <div class="search-icon">
+                                <a onclick="location.href='@Url.Action("Index", "Employee")'"><i class="fa fa-sign-out"></i></a>
+                                <!--<input type="button" class="fa fa-sign-out" value="Cerrar Sesión" onclick="location.href='@Url.Action("Index", "Employee")'" />-->
+                            </div>
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -114,7 +116,7 @@
                                         Servicio
                                     </th>
                                     <th>
-                                        Action
+                                        Asignar
                                     </th>
                                 </tr>
                             </thead>
@@ -236,6 +238,7 @@
     <script src="~/js/slick.js"></script>
     <script src="~/js/lightbox.js"></script>
     <script src="~/js/isotope.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
     <script src="~/js/site.js"></script>
 
 
