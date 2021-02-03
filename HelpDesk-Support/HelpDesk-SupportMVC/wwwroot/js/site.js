@@ -7,6 +7,7 @@
 $(document).ready(function () {
     LoadData();
     GetServices();
+    GetSupervisor();
 });
 
 function LoadData() {
@@ -24,7 +25,7 @@ function LoadData() {
                 html += '<td>' + item.status + '</td>';
                 html += '<td>' + item.reportDate + '</td>';
                 html += '<td>' + item.resolutionComment + '</td>';
-                html += '<td>' + item.serviceId + '</td>';
+                html += '<td>' + item.service.name + '</td>';
                 html += '<td><a href="#openModal" onclick="return GetById(' + item.ReportNumber + ')">Asignar</a></td>';
             });
             $('.tbody').html(html);
@@ -67,7 +68,36 @@ function GetServices() {
         success: function (result) {
 
             $.each(result, function (key, item) {
-                $("#option-services").append('<option value=' + item.serviceId + '>' + item.name + '</option>');
+              
+                var checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.name = item.name;
+                checkbox.value = item.serviceId;
+                checkbox.id = item.name;
+
+                var label = document.createElement('label')
+                label.htmlFor = item.name;
+                label.appendChild(document.createTextNode('' + item.name));
+                $("#form-check").append(checkbox);
+                $("#form-check").append(label);
+            });
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    })
+}
+
+function GetSupervisor() {
+    $.ajax({
+        url: "/Employee/GetSupervisor",
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+
+            $.each(result, function (key, item) {
+                $("#option-supervisor").append('<option value=' + item.employeeId + '>' + item.name + ' ' + item.firstSurname + ' ' + item.secondSurname +'</option>');
             });
         },
         error: function (errorMessage) {
@@ -77,6 +107,7 @@ function GetServices() {
 }
 
 function AddEmployee() {
+
     let isSupervisor = false;
     var ServiceList = [{
         //employeeId = 2
