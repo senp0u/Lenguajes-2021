@@ -27,6 +27,14 @@ namespace HelpDesk_SupportAPI.Controllers
             return await _context.Employee.ToListAsync();
         }
 
+        // GET: api/Employee/GetEmployeeSupervisor
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeSupervisor()
+        {
+            return await _context.Employee.Where(i => i.IsSupervisor == true).ToListAsync();
+        }
+
         // GET: api/Employee/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
@@ -104,6 +112,15 @@ namespace HelpDesk_SupportAPI.Controllers
         private bool EmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.EmployeeId == id);
+        }
+
+        [Route("[action]/email={email}&password={password}")]
+        [HttpGet]
+        public Employee GetEmployeeToAuthenticate(string email, string password)
+        {
+            var employee = _context.Employee.Where(a => a.Email.Equals(email) && a.Password.Equals(password)).Single();
+
+            return employee;
         }
     }
 }
