@@ -73,6 +73,22 @@ namespace HelpDesk_SupportAPI.Controllers
             return NoContent();
         }
 
+        //PUT: api/Issue/issue=#&employee=#
+        [HttpPut]
+        public IActionResult PutAssignEmployee(Issue issue)
+        {
+
+            int result = _context.Database.ExecuteSqlRaw("AssignEmployee {0}, {1}",
+                                issue.ReportNumber,
+                                issue.EmployeeId);
+            if (result == 0)
+            {
+                throw new OperationCanceledException();
+            }
+
+            return Ok(result);
+        }
+
         // POST: api/Issue
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
