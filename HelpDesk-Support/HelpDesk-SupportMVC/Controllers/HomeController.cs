@@ -18,9 +18,18 @@ namespace HelpDesk_SupportMVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int approved)
         {
-            return View();
+            dynamic redirect;
+            if (approved == 1)
+            {
+                redirect = View();
+            }
+            else {
+                redirect = RedirectToAction("Index", "Employee");
+
+            }
+            return redirect;
         }
 
         public IActionResult Privacy()

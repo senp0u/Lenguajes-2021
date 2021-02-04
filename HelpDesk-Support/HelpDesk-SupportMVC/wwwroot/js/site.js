@@ -18,15 +18,23 @@ function LoadData() {
         dataType: "json",
         success: function (result) {
             var html = '';
+            var employee = '';
             $.each(result, function (key, item) {
                 html += '<tr>';
-                html += '<td>' + item.reportNumber + '</td>';
                 html += '<td>' + item.classification + '</td>';
                 html += '<td>' + item.status + '</td>';
                 html += '<td>' + item.reportDate + '</td>';
                 html += '<td>' + item.resolutionComment + '</td>';
                 html += '<td>' + item.service.name + '</td>';
-                html += '<td><a href="#openModal" onclick="return GetById(' + item.ReportNumber + ')">Asignar</a></td>';
+
+
+                if (item.employeeId == null) {
+                    html += '<td><a href="#openModal" data-toggle="modal" onclick="return GetById(' + item.ReportNumber + ')">Asignar</a></td>';
+                }
+                else
+                {
+                    html += '<td>Asignado</td>';
+                }
             });
             $('.tbody').html(html);
             TableLanguage();
@@ -45,14 +53,14 @@ function TableLanguage() {
             "zeroRecords": "No encontrado, siga intentando",
             "info": "Mostrando _PAGE_ de _PAGES_",
             "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtered from _MAX_ total records)",
+            "infoFiltered": "(filtrado de _MAX_ registros en total)",
             "loadingRecords": "Cargando...",
             "search": "Buscar: ",
             "paginate": {
                 "first": "Primero",
                 "last": "Último",
-                "next": "Siguiente",
-                "previous": "Anterior"
+                "next": ">",
+                "previous": "<"
             }
         },
         "pagingType": "full_numbers"
@@ -74,10 +82,13 @@ function GetServices() {
                 checkbox.name = item.name;
                 checkbox.value = item.serviceId;
                 checkbox.id = item.name;
+                checkbox.style = "margin-left:30px";
 
                 var label = document.createElement('label')
                 label.htmlFor = item.name;
                 label.appendChild(document.createTextNode('' + item.name));
+                label.style = "margin-left:10px";
+
                 $("#form-check").append(checkbox);
                 $("#form-check").append(label);
             });
@@ -107,6 +118,12 @@ function GetSupervisor() {
 }
 
 function AddEmployee() {
+
+    document.getElementById('name').value = '';
+    document.getElementById('first-surname').value = '';
+    document.getElementById('second-surname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
 
     let isSupervisor = false;
     var ServiceList = [{
@@ -164,3 +181,13 @@ function ShowLabel(id) {
     document.getElementById(id).style.visibility = "visible";
 
 }
+
+function Clear() {
+
+    document.getElementById('name').value = '';
+    document.getElementById('first-surname').value = '';
+    document.getElementById('second-surname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+}
+

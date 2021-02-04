@@ -118,9 +118,15 @@ namespace HelpDesk_SupportAPI.Controllers
         [HttpGet]
         public Employee GetEmployeeToAuthenticate(string email, string password)
         {
+            try { 
             var employee = _context.Employee.Where(a => a.Email.Equals(email) && a.Password.Equals(password)).Single();
 
             return employee;
+            }catch (AggregateException)
+            {
+
+                throw;
+            }
         }
     }
 }
