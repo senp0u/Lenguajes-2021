@@ -26,32 +26,50 @@ namespace HelpDesk_SupportMVC.Controllers
         {
             HttpContext.Session.SetString("name", "");
             HttpContext.Session.SetInt32("isSupervisor", 0);
+            HttpContext.Session.SetString("firstSurname", "");
+            HttpContext.Session.SetString("secondSurname", "");
+            HttpContext.Session.SetString("error", "");
             return View();
         }
 
         [HttpPost]
         public IActionResult Index(Employee employee)
         {
-            Employee authorizedEmployee = GetEmployeeToAuthenticate(employee.Email, employee.Password);
-            var isSupervisor = 0;
             dynamic redirect;
-            if (authorizedEmployee != null)
+            if (employee.Email == null || employee.Password == null)
             {
-                if (authorizedEmployee.IsSupervisor)
-                {
-                    isSupervisor = 1;
-                }
-                else {
-                    isSupervisor = 0;
-                }
-
-                HttpContext.Session.SetString("name", authorizedEmployee.Name);
-                HttpContext.Session.SetInt32("isSupervisor", isSupervisor);
-                redirect = RedirectToAction("Index", "Home");
-            }
-            else
-            {
+                
+                HttpContext.Session.SetString("error", "");
                 redirect = View();
+            }
+            else { 
+
+                Employee authorizedEmployee = GetEmployeeToAuthenticate(employee.Email, employee.Password);
+                var isSupervisor = 0;
+           
+                if (authorizedEmployee != null)
+                {
+                    if (authorizedEmployee.IsSupervisor)
+                    {
+                        isSupervisor = 1;
+                    }
+                    else {
+                        isSupervisor = 0;
+                    }
+
+                    HttpContext.Session.SetString("name", authorizedEmployee.Name);
+                    HttpContext.Session.SetString("firstSurname", authorizedEmployee.FirstSurname);
+                    HttpContext.Session.SetString("secondSurname", authorizedEmployee.SecondSurname);
+                    HttpContext.Session.SetInt32("isSupervisor", isSupervisor);
+                    HttpContext.Session.SetString("error", "");
+                    redirect = RedirectToAction("Index", "Home", new {@approved = 1});
+                }
+                else
+                {
+                    ModelState.Clear();
+                    HttpContext.Session.SetString("error", "Usuario o contraseña incorrecta.");
+                    redirect = View();
+                }
             }
 
             return redirect;
@@ -130,6 +148,7 @@ namespace HelpDesk_SupportMVC.Controllers
 
             Employee employee = null;
 
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(apiBaseUrl + "/Employee/GetEmployeeToAuthenticate/email=" + email + "&password=" + password);
@@ -147,12 +166,12 @@ namespace HelpDesk_SupportMVC.Controllers
 
                     }
                 }
-                catch (AggregateException agg_ex)
+                catch (AggregateException)
                 {
-                    var ex = agg_ex.InnerExceptions[0];
+                    employee = null;
                 }
 
-                return employee;
+                return employee ;
             }
 
         }
