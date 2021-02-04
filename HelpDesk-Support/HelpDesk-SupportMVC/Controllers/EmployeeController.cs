@@ -108,6 +108,22 @@ namespace HelpDesk_SupportMVC.Controllers
             return Json(employees);
         }
 
+        ///Employee/GetNonSupervisors
+        [HttpGet]
+        public async Task<IActionResult> GetNonSupervisors()
+        {
+            IEnumerable<Employee> employees = null;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(apiBaseUrl + "/Employee/GetEmployeesNonSupervisor"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    employees = JsonConvert.DeserializeObject<IEnumerable<Employee>>(apiResponse);
+                }
+            }
+            return Json(employees);
+        }
+
         [HttpPost]
         public IActionResult PostEmployee([FromBody] Employee employee)
         {
