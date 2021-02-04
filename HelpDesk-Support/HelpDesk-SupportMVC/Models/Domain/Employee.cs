@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +13,11 @@ namespace HelpDesk_SupportMVC.Models.Domain
         private string name;
         private string firstSurname;
         private string secondSurname;
+
+        [Required(ErrorMessage = "Se requiere el correo.")]
         private string email;
+
+        [Required(ErrorMessage = "Se requiere la contraseña.")]
         private string password;
         private bool isSupervisor;
         private int supervisorId;
@@ -57,7 +62,11 @@ namespace HelpDesk_SupportMVC.Models.Domain
         public string Name { get => name; set => name = value; }
         public string FirstSurname { get => firstSurname; set => firstSurname = value; }
         public string SecondSurname { get => secondSurname; set => secondSurname = value; }
+
+        [Required(ErrorMessage = "Se requiere el correo.")]
         public string Email { get => email; set => email = value; }
+
+        [Required(ErrorMessage = "Se requiere la contraseña.")]
         public string Password { get => password; set => password = value; }
         public bool IsSupervisor { get => isSupervisor; set => isSupervisor = value; }
         public int SupervisorId { get => supervisorId; set => supervisorId = value; }

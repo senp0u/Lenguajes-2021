@@ -25,7 +25,7 @@ namespace HelpDesk_SupportMVC.Controllers
             return View();
         }
 
-        
+
         [HttpGet]
         public async Task<IActionResult> GetIssues()
         {
@@ -40,5 +40,23 @@ namespace HelpDesk_SupportMVC.Controllers
             }
             return Json(students);
         }
+
+        //Issue/PutAssignEmployee
+        [HttpPut]
+        public IActionResult PutAssignEmployee([FromBody] Issue issue)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var putTask = httpClient.PutAsJsonAsync<Issue>(apiBaseUrl + "/Issue", issue);
+                putTask.Wait();
+                var result = putTask.Result;
+                if (!result.IsSuccessStatusCode)
+                {
+                    throw new FieldAccessException();
+                }
+            }
+            return NoContent();
+        }
+        
     }
 }
