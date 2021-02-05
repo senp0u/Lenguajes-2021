@@ -31,6 +31,7 @@ function LoadData() {
                 if (isSupervisor == 1) {
 
                     html += '<tr>';
+                    html += '<td>' + item.reportNumber + '</td>';
                     html += '<td>' + item.classification + '</td>';
                     html += '<td>' + item.status + '</td>';
                     html += '<td>' + item.reportDate + '</td>';
@@ -48,12 +49,13 @@ function LoadData() {
                 } else if (idSupporter == item.employeeId) {
 
                     html += '<tr>';
+                    html += '<td>' + item.reportNumber + '</td>';
                     html += '<td>' + item.classification + '</td>';
                     html += '<td>' + item.status + '</td>';
                     html += '<td>' + item.reportDate + '</td>';
                     html += '<td>' + item.resolutionComment + '</td>';
                     html += '<td>' + item.service.name + '</td>';
-                    html += '<td><a href="#resolved" data-toggle="modal" onclick="return GetById(' + item.ReportNumber + ')">Resolver</a></td>';
+                    html += '<td><a href="#resolved" data-toggle="modal" onclick="return GetByIssueId(' + item.ReportNumber + ')">Resolver</a></td>';
                 }
                 
             });
@@ -217,7 +219,7 @@ function GetById(issueId) {
             document.getElementById('status').value = result['status'];
             document.getElementById('report-date').value = result['reportDate'];
             document.getElementById('resolution').value = result['resolutionComment'];
-            document.getElementById('note').value = result.notes['description'];
+
             FillSuporterSelector();
         },
         error: function (errorMessage) {
