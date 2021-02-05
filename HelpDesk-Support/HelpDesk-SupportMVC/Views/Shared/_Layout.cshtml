@@ -51,9 +51,7 @@
                             {
                                 <li class="scroll-to-section"><a href="#add-supporter">Soportista(+)</a></li>
                             }
-                            <div class="search-icon">
-                                <a onclick="location.href='@Url.Action("Index", "Employee")'"><i class="fa fa-sign-out"></i></a>
-                            </div>
+                            <li class="scroll-to-section"><a onclick="location.href='@Url.Action("Index", "Employee")'">Cerrar Sesión</a></li>
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -80,6 +78,9 @@
 
     <br>
 
+    <input type="text" name="id-employee" id="id-employee" style="visibility:hidden" value="@HttpContextAccessor.HttpContext.Session.GetInt32("employeeId")">
+     <input type="text" name="supervisor" id="supervisor" style="visibility:hidden" value="@HttpContextAccessor.HttpContext.Session.GetInt32("isSupervisor")">
+
     <section id="issue">
         <div class="container">
             <div class="row">
@@ -92,6 +93,9 @@
 
                             <thead>
                                 <tr>
+                                    <th>
+                                        ID
+                                    </th>
                                     <th>
                                         Clasificación
                                     </th>
@@ -108,7 +112,7 @@
                                         Servicio
                                     </th>
                                     <th>
-                                        Asignar
+                                        Acción
                                     </th>
                                 </tr>
                             </thead>
@@ -200,7 +204,99 @@
                             </tr>
                         </table>
                         <div class="modal-footer">
-                            <button class="submit-btn form-control" id="form-submit" onclick="return IssueUpdate()">Asignar</button>
+                            <button class="submit-btn form-control" id="form-submit" onclick="return IssueUpdate()" data-dismiss="modal">Asignar</button>
+                            <br>
+                            <button type="button" class="submit-btn form-control" id="form-submit" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="resolved" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Resolver Solicitud</h2>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="id-issue2">ID: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <input class="form-control" type="text" name="id-issue2" id="id-issue2" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="classification2">Clasificación: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <input class="form-control" type="text" name="classification2" id="classification2" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="status">Estado: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <select class="form-control" name="option-status" id="option-status">
+                                            <option value="En proceso">En proceso</option>
+                                            <option value="Resuelto">Resuelto</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="report-date2">Fecha: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <input class="form-control" type="text" name="report-date2" id="report-date2" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="resolution2">Comentario: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <textarea class="form-control" name="resolution2" id="resolution2" disabled></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="resolution">Nota: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <textarea class="form-control" name="note" id="note"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="modal-footer">
+                            <button class="submit-btn form-control" data-dismiss="modal" id="form-submit" onclick="return">Agregar</button>
                             <br>
                             <button type="button" class="submit-btn form-control" id="form-submit" data-dismiss="modal">Cancelar</button>
                         </div>
@@ -260,18 +356,6 @@
 
                                 </fieldset>
                             </div>
-                            <div class="col-md-1 col-sm-12">
-                                <fieldset>
-                                    <label for="option-supervisor">Supervisor:</label><br>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-5 col-sm-12">
-                                <fieldset>
-                                    <select name="option-supervisor" id="option-supervisor" class="form-control"></select>
-
-                                </fieldset>
-                            </div>
-
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-12" style="margin-top:20px;">

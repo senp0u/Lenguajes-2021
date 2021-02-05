@@ -13,8 +13,9 @@ namespace HelpDesk_SupportMVC.Controllers
 {
     public class EmployeeController : Controller
     {
-        
+
         private readonly string apiBaseUrl;
+        public int test;
 
         public EmployeeController(IConfiguration configuration)
         {
@@ -28,6 +29,7 @@ namespace HelpDesk_SupportMVC.Controllers
             HttpContext.Session.SetInt32("isSupervisor", 0);
             HttpContext.Session.SetString("firstSurname", "");
             HttpContext.Session.SetString("secondSurname", "");
+            HttpContext.Session.SetInt32("employeeId", 0);
             HttpContext.Session.SetString("error", "");
             return View();
         }
@@ -38,15 +40,15 @@ namespace HelpDesk_SupportMVC.Controllers
             dynamic redirect;
             if (employee.Email == null || employee.Password == null)
             {
-                
+
                 HttpContext.Session.SetString("error", "");
                 redirect = View();
             }
-            else { 
+            else {
 
                 Employee authorizedEmployee = GetEmployeeToAuthenticate(employee.Email, employee.Password);
                 var isSupervisor = 0;
-           
+
                 if (authorizedEmployee != null)
                 {
                     if (authorizedEmployee.IsSupervisor)
@@ -61,8 +63,9 @@ namespace HelpDesk_SupportMVC.Controllers
                     HttpContext.Session.SetString("firstSurname", authorizedEmployee.FirstSurname);
                     HttpContext.Session.SetString("secondSurname", authorizedEmployee.SecondSurname);
                     HttpContext.Session.SetInt32("isSupervisor", isSupervisor);
+                    HttpContext.Session.SetInt32("employeeId", authorizedEmployee.EmployeeId);
                     HttpContext.Session.SetString("error", "");
-                    redirect = RedirectToAction("Index", "Home", new {@approved = 1});
+                    redirect = RedirectToAction("Index", "Home", new { @approved = 1 });
                 }
                 else
                 {
@@ -171,7 +174,7 @@ namespace HelpDesk_SupportMVC.Controllers
                     employee = null;
                 }
 
-                return employee ;
+                return employee;
             }
 
         }
