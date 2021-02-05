@@ -41,10 +41,28 @@ namespace HelpDesk_SupportMVC.Controllers
             return Json(students);
         }
 
+
+        [Route("Issue/GetIssueById/{issueId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetIssueById(int issueId)
+        {
+            Issue issue = null;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(apiBaseUrl + "/Issue/"+ issueId))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    issue = JsonConvert.DeserializeObject<Issue>(apiResponse);
+                }
+            }
+            return Json(issue);
+        }
+
         //Issue/PutAssignEmployee
         [HttpPut]
         public IActionResult PutAssignEmployee([FromBody] Issue issue)
         {
+            issue.SupervisorId = 5;
             using (var httpClient = new HttpClient())
             {
                 var putTask = httpClient.PutAsJsonAsync<Issue>(apiBaseUrl + "/Issue", issue);
