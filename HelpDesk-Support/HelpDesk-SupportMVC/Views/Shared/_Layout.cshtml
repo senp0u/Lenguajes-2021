@@ -80,6 +80,9 @@
 
     <br>
 
+    <input type="text" name="id-employee" id="id-employee" style="visibility:hidden" value="@HttpContextAccessor.HttpContext.Session.GetInt32("employeeId")">
+     <input type="text" name="supervisor" id="supervisor" style="visibility:hidden" value="@HttpContextAccessor.HttpContext.Session.GetInt32("isSupervisor")">
+
     <section id="issue">
         <div class="container">
             <div class="row">
@@ -108,7 +111,7 @@
                                         Servicio
                                     </th>
                                     <th>
-                                        Asignar
+                                        Acción
                                     </th>
                                 </tr>
                             </thead>
@@ -201,6 +204,95 @@
                         </table>
                         <div class="modal-footer">
                             <button class="submit-btn form-control" id="form-submit" onclick="return IssueUpdate()">Asignar</button>
+                            <br>
+                            <button type="button" class="submit-btn form-control" id="form-submit" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="resolved" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Resolver Solicitud</h2>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="id-issue">ID: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <input class="form-control" type="text" name="id-issue" id="id-issue" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="classification">Clasificación: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <input class="form-control" type="text" name="classification" id="classification" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="status">Estado: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <select class="form-control" name="option-status" id="option-status"></select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="report-date">Fecha: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <input class="form-control" type="text" name="report-date" id="report-date" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="resolution">Comentario: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <textarea class="form-control" name="resolution" id="resolution" disabled></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <label for="resolution">Nota: </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="modal-body">
+                                        <textarea class="form-control" name="note" id="note"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="modal-footer">
+                            <button class="submit-btn form-control" id="form-submit" onclick="return IssueUpdate()">Finalizar</button>
                             <br>
                             <button type="button" class="submit-btn form-control" id="form-submit" data-dismiss="modal">Cancelar</button>
                         </div>
