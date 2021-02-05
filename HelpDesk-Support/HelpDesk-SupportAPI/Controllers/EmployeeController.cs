@@ -35,6 +35,15 @@ namespace HelpDesk_SupportAPI.Controllers
             return await _context.Employee.Where(i => i.IsSupervisor == true).ToListAsync();
         }
 
+        // GET: api/Employee/GetEmployeesNonSupervisor
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeesNonSupervisor()
+        {
+            return await _context.Employee.Where(i => i.IsSupervisor == false).ToListAsync();
+        }
+
+
         // GET: api/Employee/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)

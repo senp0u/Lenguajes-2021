@@ -19,22 +19,42 @@ function LoadData() {
         success: function (result) {
             var html = '';
             var employee = '';
+
+            var idSupporter = document.getElementById('id-employee').value;
+
+            var isSupervisor = document.getElementById('supervisor').value;
+
             $.each(result, function (key, item) {
-                html += '<tr>';
-                html += '<td>' + item.classification + '</td>';
-                html += '<td>' + item.status + '</td>';
-                html += '<td>' + item.reportDate + '</td>';
-                html += '<td>' + item.resolutionComment + '</td>';
-                html += '<td>' + item.service.name + '</td>';
+
+                if (isSupervisor == 1) {
+
+                    html += '<tr>';
+                    html += '<td>' + item.classification + '</td>';
+                    html += '<td>' + item.status + '</td>';
+                    html += '<td>' + item.reportDate + '</td>';
+                    html += '<td>' + item.resolutionComment + '</td>';
+                    html += '<td>' + item.service.name + '</td>';
 
 
-                if (item.employeeId == null) {
-                    html += '<td><a href="#openModal" data-toggle="modal" onclick="return GetById(' + item.ReportNumber + ')">Asignar</a></td>';
+                    if (item.employeeId == null) {
+                        html += '<td><a href="#openModal" data-toggle="modal" onclick="return GetById(' + item.ReportNumber + ')">Asignar</a></td>';
+                    }
+                    else {
+                        html += '<td>Asignado</td>';
+                    }
+
+                } else if (idSupporter == item.employeeId) {
+
+                    html += '<tr>';
+                    html += '<td>' + item.classification + '</td>';
+                    html += '<td>' + item.status + '</td>';
+                    html += '<td>' + item.reportDate + '</td>';
+                    html += '<td>' + item.resolutionComment + '</td>';
+                    html += '<td>' + item.service.name + '</td>';
+                    html += '<td><a href="#resolved" data-toggle="modal" onclick="return GetById(' + item.ReportNumber + ')">Resolver</a></td>';
+                    
                 }
-                else
-                {
-                    html += '<td>Asignado</td>';
-                }
+                
             });
             $('.tbody').html(html);
             TableLanguage();
@@ -190,4 +210,3 @@ function Clear() {
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';
 }
-
