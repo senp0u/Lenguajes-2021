@@ -62,7 +62,6 @@ namespace HelpDesk_SupportMVC.Controllers
         [HttpPut]
         public IActionResult PutAssignEmployee([FromBody] Issue issue)
         {
-            issue.SupervisorId = 5;
             using (var httpClient = new HttpClient())
             {
                 var putTask = httpClient.PutAsJsonAsync<Issue>(apiBaseUrl + "/Issue", issue);
@@ -70,7 +69,7 @@ namespace HelpDesk_SupportMVC.Controllers
                 var result = putTask.Result;
                 if (!result.IsSuccessStatusCode)
                 {
-                    throw new FieldAccessException();
+                    throw new InvalidOperationException();
                 }
             }
             return NoContent();

@@ -39,7 +39,7 @@ function LoadData() {
 
 
                     if (item.employeeId == null) {
-                        html += '<td><a href="#openModal" data-toggle="modal" onclick="return GetById(' + item.reportNumber + ')">Asignar</a></td>';
+                        html += '<td ><div class="asign-' + item.reportNumber +'"><a href="#openModal" data-toggle="modal" onclick="return GetById(' + item.reportNumber + ')">Asignar</a></td>';
                     }
                     else {
                         html += '<td>Asignado</td>';
@@ -227,33 +227,38 @@ function GetById(issueId) {
 }
 
 function FillSuporterSelector() {
-    $.ajax({
-        url: "/Employee/GetNonSupervisors",
-        type: "GET",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            let selector = $("#option-supporter");
-            $.each(result, function (key, item) {
-                let option = document.createElement('option');
-                option.value = item.employeeId;
-                option.innerHTML = item.name + ' ' + item.firstSurname;
-                selector.append(option);
-            });
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    });
+    let selector = $("#option-supporter");
+    if (selector.val() == null) {
+        $.ajax({
+            url: "/Employee/GetNonSupervisors",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                $.each(result, function (key, item) {
+                    let option = document.createElement('option');
+                    option.value = item.employeeId;
+                    option.innerHTML = item.name + ' ' + item.firstSurname;
+                    selector.append(option);
+                });
+            },
+            error: function (errorMessage) {
+                alert(errorMessage.responseText);
+            }
+        });
+    }
 }
 
 //So ist es immer
 function IssueUpdate() {
-    let issue = {
-        "reportNumber": $('#id-issue').val(),
-        "employeeId": $('#option-supporter').val()
-    }
 
+    let issue = {
+        reportNumber: parseInt($('#id-issue').val()),
+        employeeId: parseInt($('#option-supporter').val()),
+        supervisorId: parseInt($('#id-employee').val())
+    };
+   
     $.ajax({
         url: "/Issue/PutAssignEmployee",
         data: JSON.stringify(issue),
@@ -261,7 +266,8 @@ function IssueUpdate() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
-           
+            let _class = '.asign-' + issue.reportNumber;
+            $(_class).html('Asignado');
         },
         error: function (errorMessage) {
             alert(errorMessage);
