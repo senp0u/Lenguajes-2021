@@ -55,4 +55,5 @@ SPRING 2
   CU10 - Mostrar solicitudes registradas. (completo)
   CU8 - Ingresar usuarios de soporte a la aplicación. (Autenticarse)
   CU9 - Salir de la aplicación.  
+  CU11 - Asignación de solicitudes a soportistas.
 
