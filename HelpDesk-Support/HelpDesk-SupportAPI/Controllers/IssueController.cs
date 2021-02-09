@@ -78,9 +78,10 @@ namespace HelpDesk_SupportAPI.Controllers
         public IActionResult PutAssignEmployee(Issue issue)
         {
 
-            int result = _context.Database.ExecuteSqlRaw("AssignEmployee {0}, {1}",
+            int result = _context.Database.ExecuteSqlRaw("AssignEmployee {0}, {1}, {2}",
                                 issue.ReportNumber,
-                                issue.EmployeeId);
+                                issue.EmployeeId,
+                                issue.SupervisorId);
             if (result == 0)
             {
                 throw new OperationCanceledException();

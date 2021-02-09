@@ -4,6 +4,8 @@
 // Write your JavaScript code.
 
 //this function loads the website
+
+
 $(document).ready(function () {
     LoadData();
     GetServices();
@@ -29,6 +31,7 @@ function LoadData() {
                 if (isSupervisor == 1) {
 
                     html += '<tr>';
+                    html += '<td>' + item.reportNumber + '</td>';
                     html += '<td>' + item.classification + '</td>';
                     html += '<td>' + item.status + '</td>';
                     html += '<td>' + item.reportDate + '</td>';
@@ -37,7 +40,7 @@ function LoadData() {
 
 
                     if (item.employeeId == null) {
-                        html += '<td><a href="#openModal" data-toggle="modal" onclick="return GetById(' + item.ReportNumber + ')">Asignar</a></td>';
+                        html += '<td ><div class="asign-' + item.reportNumber +'"><a href="#openModal" data-toggle="modal" onclick="return GetById(' + item.reportNumber + ')">Asignar</a></td>';
                     }
                     else {
                         html += '<td>Asignado</td>';
@@ -46,13 +49,13 @@ function LoadData() {
                 } else if (idSupporter == item.employeeId) {
 
                     html += '<tr>';
+                    html += '<td>' + item.reportNumber + '</td>';
                     html += '<td>' + item.classification + '</td>';
                     html += '<td>' + item.status + '</td>';
                     html += '<td>' + item.reportDate + '</td>';
                     html += '<td>' + item.resolutionComment + '</td>';
                     html += '<td>' + item.service.name + '</td>';
-                    html += '<td><a href="#resolved" data-toggle="modal" onclick="return GetById(' + item.ReportNumber + ')">Resolver</a></td>';
-                    
+                    html += '<td><a href="#resolved" data-toggle="modal" onclick="return GetByIssueId(' + item.ReportNumber + ')">Resolver</a></td>';
                 }
                 
             });
@@ -63,7 +66,6 @@ function LoadData() {
             alert(errorMessage.responseText);
         }
     })
-
 }
 
 function TableLanguage() {
@@ -96,7 +98,7 @@ function GetServices() {
         success: function (result) {
 
             $.each(result, function (key, item) {
-              
+
                 var checkbox = document.createElement('input');
                 checkbox.type = "checkbox";
                 checkbox.name = item.name;
@@ -116,8 +118,11 @@ function GetServices() {
         error: function (errorMessage) {
             alert(errorMessage.responseText);
         }
-    })
+    });
 }
+
+
+
 
 function GetSupervisor() {
     $.ajax({
@@ -197,9 +202,79 @@ function AddEmployee() {
 }
 
 function ShowLabel(id) {
-
     document.getElementById(id).style.visibility = "visible";
 
+}
+
+function GetById(issueId) {
+    
+    $.ajax({
+        url: "/Issue/GetIssueById/" + issueId,
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            document.getElementById('id-issue').value = result['reportNumber'];
+            document.getElementById('classification').value = result['classification'];
+            document.getElementById('status').value = result['status'];
+            document.getElementById('report-date').value = result['reportDate'];
+            document.getElementById('resolution').value = result['resolutionComment'];
+
+            FillSuporterSelector();
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+}
+
+function FillSuporterSelector() {
+    let selector = $("#option-supporter");
+    if (selector.val() == null) {
+        $.ajax({
+            url: "/Employee/GetNonSupervisors",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                $.each(result, function (key, item) {
+                    let option = document.createElement('option');
+                    option.value = item.employeeId;
+                    option.innerHTML = item.name + ' ' + item.firstSurname;
+                    selector.append(option);
+                });
+            },
+            error: function (errorMessage) {
+                alert(errorMessage.responseText);
+            }
+        });
+    }
+}
+
+//So ist es immer
+function IssueUpdate() {
+
+    let issue = {
+        reportNumber: parseInt($('#id-issue').val()),
+        employeeId: parseInt($('#option-supporter').val()),
+        supervisorId: parseInt($('#id-employee').val())
+    };
+   
+    $.ajax({
+        url: "/Issue/PutAssignEmployee",
+        data: JSON.stringify(issue),
+        type: "PUT",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            let _class = '.asign-' + issue.reportNumber;
+            $(_class).html('Asignado');
+        },
+        error: function (errorMessage) {
+            alert(errorMessage);
+        }
+    });
 }
 
 function Clear() {
