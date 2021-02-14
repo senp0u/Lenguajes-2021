@@ -27,34 +27,34 @@ public class Client {
 	@Column(name = "ClientId")
 	private int clientId;
 	
-	@Column(name = "Name", unique = false, length = 25)
+	@Column(name = "Name", unique = false, nullable = false ,length = 25)
 	private String name;
 	
-	@Column(name = "FirstSurname", unique = false, length = 20)
+	@Column(name = "FirstSurname", unique = false, nullable = false ,length = 20)
 	private String firstSurname;
 	
 	@Column(name = "SecondSurname", unique = false, length = 20)
 	private String secondSurname;
 	
-	@Column(name = "Address", unique = false, length = 40)
+	@Column(name = "Address", unique = false, nullable = false ,length = 40)
 	private String address;
 	
-	@Column(name = "Phone", unique = false, length = 15)
+	@Column(name = "Phone", unique = false, nullable = false ,length = 15)
 	private String phone;
 	
 	@Column(name = "SecondContact", unique = false, length = 15)
 	private String secondContact;
 	
-	@Column(name = "Email", unique = true, length = 30)
+	@Column(name = "Email", unique = true, nullable = false ,length = 30)
 	private String email;
 	
-	@Column(name = "Password", unique = false, length = 50)
+	@Column(name = "Password", unique = false, nullable = false ,length = 50)
 	private String password;
 	
-	@Column(name = "CreateBy", unique = false, length = 25)
+	@Column(name = "CreateBy", unique = false, nullable = false ,length = 25)
 	private String createBy;
 	
-	@Column(name = "CreateAt", unique = false)
+	@Column(name = "CreateAt", nullable = false ,unique = false)
 	private Date createAt;
 	
 	@Column(name = "ModifyBy", unique = false, length = 25)

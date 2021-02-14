@@ -21,10 +21,10 @@ public class Service {
 	@Column(name = "Name", unique = false, length = 25)
 	private String name;
 	
-	@Column(name = "CreateBy", unique = false, length = 25)
+	@Column(name = "CreateBy", nullable = false ,unique = false, length = 25)
 	private String createBy;
 	
-	@Column(name = "CreateAt", unique = false)
+	@Column(name = "CreateAt", nullable = false ,unique = false)
 	private Date createAt;
 	
 	@Column(name = "ModifyBy", unique = false, length = 25)

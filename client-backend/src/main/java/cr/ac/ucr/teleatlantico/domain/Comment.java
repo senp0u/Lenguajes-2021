@@ -18,13 +18,13 @@ public class Comment {
 	@Column(name = "CommentId")
 	private int commentId;
 	
-	@Column(name = "Description", unique = false, length = 100)
+	@Column(name = "Description", nullable = false ,unique = false, length = 100)
 	private String description;
 	
-	@Column(name = "CreateBy", unique = false, length = 25)
+	@Column(name = "CreateBy", nullable = false ,unique = false, length = 25)
 	private String createBy;
 	
-	@Column(name = "CreateAt", unique = false)
+	@Column(name = "CreateAt", nullable = false ,unique = false)
 	private Date createAt;
 	
 	@Column(name = "ModifyBy", unique = false, length = 25)

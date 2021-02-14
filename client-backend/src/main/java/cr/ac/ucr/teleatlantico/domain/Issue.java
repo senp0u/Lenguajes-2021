@@ -26,19 +26,19 @@ public class Issue {
 	@Column(name = "IssueId")
 	private int issueId;
 	
-	@Column(name = "Description", unique = false, length = 100)
+	@Column(name = "Description", unique = false, nullable = false ,length = 100)
 	private String description;
 	
-	@Column(name = "Status", unique = false, length = 15)
+	@Column(name = "Status", unique = false, nullable = false ,length = 15)
 	private String status;
 	
 	@Column(name = "SupporterUser", unique = false, length = 25)
 	private String supporterUser;
 	
-	@Column(name = "CreateBy", unique = false, length = 25)
+	@Column(name = "CreateBy", unique = false, nullable = false ,length = 25)
 	private String createBy;
 	
-	@Column(name = "CreateAt", unique = false)
+	@Column(name = "CreateAt", nullable = false ,unique = false)
 	private Date createAt;
 	
 	@Column(name = "ModifyBy", unique = false, length = 25)
