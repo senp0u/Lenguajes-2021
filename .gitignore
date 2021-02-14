@@ -35,3 +35,4 @@
 /client-backend/!**/src/test/**/build/
 /client-backend/.vscode/
 /Documentos/Domain/.client-domain.vpp.lck
+/Documentos/Domain/*.vpp.*
