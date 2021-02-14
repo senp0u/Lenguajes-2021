@@ -2,18 +2,35 @@ package cr.ac.ucr.teleatlantico.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Service")
 public class Service {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ServiceId")
 	private int serviceId;
 	
+	@Column(name = "Name", unique = false, length = 25)
 	private String name;
 	
+	@Column(name = "CreateBy", unique = false, length = 25)
 	private String createBy;
 	
+	@Column(name = "CreateAt", unique = false)
 	private Date createAt;
 	
+	@Column(name = "ModifyBy", unique = false, length = 25)
 	private String modifyBy;
 	
+	@Column(name = "ModifyAt", unique = false)
 	private Date modifyAt;
 	
 

@@ -2,18 +2,35 @@ package cr.ac.ucr.teleatlantico.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Comment")
 public class Comment {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CommentId")
 	private int commentId;
 	
+	@Column(name = "Description", unique = false, length = 100)
 	private String description;
 	
+	@Column(name = "CreateBy", unique = false, length = 25)
 	private String createBy;
 	
+	@Column(name = "CreateAt", unique = false)
 	private Date createAt;
 	
+	@Column(name = "ModifyBy", unique = false, length = 25)
 	private String modifyBy;
 	
+	@Column(name = "ModifyAt", unique = false)
 	private Date modifyAt;
 	
 	
@@ -34,6 +51,22 @@ public class Comment {
 		this.createAt = new Date();
 		this.modifyBy = "";
 		this.modifyAt = new Date();
+	}
+
+	public int getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getCreateBy() {
