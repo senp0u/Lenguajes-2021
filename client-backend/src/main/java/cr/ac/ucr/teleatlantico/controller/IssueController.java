@@ -13,5 +13,5 @@ import cr.ac.ucr.teleatlantico.service.IssueService;
 public class IssueController {
 
 	@Autowired
-	private IssueService issueService;
+	private IssueService service;
 }
