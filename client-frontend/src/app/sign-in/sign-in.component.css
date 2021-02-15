@@ -1,0 +1,17 @@
+.main-div{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .example-card {
+    background: rgb(106, 151, 211);
+    width: 500px;
+    text-align: center;
+  }
+
+  .margin {
+    width: 300px;
+    margin-left: 100px;
+  }
