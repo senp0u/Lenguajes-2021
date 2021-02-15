@@ -9,9 +9,8 @@ import cr.ac.ucr.teleatlantico.domain.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer>{
 
-	@Query(value = "SELECT COUNT(c.ClientId) FROM Client c "
-			 	 + "WHERE c.email = ?1 AND c.password = ?2;")
-	int findByEmailAndPassword(String email, String password);
 	
-	
+	@Query(value = "SELECT c FROM Client c "
+				 + "WHERE c.email = ?1")
+	Client findByEmail(String email);
 }

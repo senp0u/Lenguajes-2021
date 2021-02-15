@@ -39,4 +39,8 @@ public class ClientService {
 	public void delete(int id) {
 		repository.deleteById(id);
 	}
+	
+	public Client getXXClientByEmail(String email) {
+		return repository.findByEmail(email);
+	}
 }
