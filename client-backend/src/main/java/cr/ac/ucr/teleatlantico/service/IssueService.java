@@ -12,7 +12,7 @@ import cr.ac.ucr.teleatlantico.repository.IssueRepository;
 public class IssueService {
 
 	@Autowired
-	private IssueRepository issueRepository;
+	private IssueRepository repository;
 	
 	
 }
