@@ -23,6 +23,7 @@ public class ClientService {
 	}
 
 	public Client save(Client client) {
+		client.encryptPassword();
 		return repository.save(client);
 	}
 	

@@ -29,14 +29,14 @@ public class CustomUserDetailService implements UserDetailsService{
 				client.getEmail(),
 				client.getPassword(),
 				true,true,true,true,
-				getAuthorities(client)
+				getAuthorities()
 				);
 	}
 	
-	private static Collection<? extends GrantedAuthority>getAuthorities(Client client){
+	private static Collection<? extends GrantedAuthority>getAuthorities(){
 			//Cambiar si se agregan mas roles
 			String[] roles = {"Client"};
-			
+
 			Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(roles);
 			return authorities;
 	}
