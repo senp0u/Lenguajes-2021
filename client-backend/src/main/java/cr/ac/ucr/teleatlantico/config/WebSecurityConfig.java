@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	// necesario para mandar solicitudes de front end de diferentes origenes
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
-		UrlBasedCorsConfigurationSource fuente = new UrlBasedCorsConfigurationSource();
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration configuracion = new CorsConfiguration();
 		configuracion.setAllowedOrigins(Arrays.asList("*"));
 		configuracion.setAllowedMethods(Arrays.asList("*"));
@@ -56,8 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		configuracion.setAllowCredentials(true);
 		configuracion.applyPermitDefaultValues();
 
-		fuente.registerCorsConfiguration("/**", configuracion);
-		return fuente;
+		source.registerCorsConfiguration("/**", configuracion);
+		return source;
 	}
 
 	@Autowired

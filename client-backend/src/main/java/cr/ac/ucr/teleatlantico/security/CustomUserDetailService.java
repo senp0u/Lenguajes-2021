@@ -1,6 +1,5 @@
 package cr.ac.ucr.teleatlantico.security;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;

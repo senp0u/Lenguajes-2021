@@ -31,10 +31,10 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter{
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		AccountCredentials credencialesSesion = new AccountCredentials(email, password);
+		AccountCredentials accountCredentials = new AccountCredentials(email, password);
 		return getAuthenticationManager()
 				.authenticate(new UsernamePasswordAuthenticationToken(
-					credencialesSesion.getEmail(), credencialesSesion.getPassword(), 
+					accountCredentials.getEmail(), accountCredentials.getPassword(), 
 					Collections.emptyList())
 				);
 	}
