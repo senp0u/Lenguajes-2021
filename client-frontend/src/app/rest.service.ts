@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpParams } f
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
-const endpoint = '';
+const endpoint = 'http://localhost:8080/api';
 
 @Injectable({
   providedIn: 'root'
