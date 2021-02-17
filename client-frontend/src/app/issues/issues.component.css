@@ -1,0 +1,26 @@
+table {
+    width: 100%;
+  }
+
+  section {
+    display: table;
+  }
+  #button-row {
+    display: table-cell;
+    width: 490px;
+  }
+
+  #button-add {
+    margin-left: 50px;
+  }
+
+  #line h1 {
+    text-align: center;
+  }
+
+  #close-session {
+    text-align: right;
+    margin-right: 25px;
+  }
+
+  

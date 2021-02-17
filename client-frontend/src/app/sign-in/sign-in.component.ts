@@ -18,14 +18,13 @@ export class SignInComponent implements OnInit {
     
 
       this.loginForm = this.fb.group({
-        clientId: 0,
         email: new FormControl('', [
           Validators.required,
           Validators.email
         ]),
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]{5,8}$')
+          Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]{5,15}$')
         ])
     })
 
@@ -41,7 +40,7 @@ export class SignInComponent implements OnInit {
     }
     
     this.rest.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((result) => {
-      this.router.navigate(['/issues']);
+      this.router.navigate(['/sign-up']);
     }, (err) => {
       console.log(err);
     });
