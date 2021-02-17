@@ -47,10 +47,38 @@ export class RestService {
 
   }
 
-  getClients(): Observable<any> {
-    return this.http.get(endpoint + 'client/clients').pipe(
-     catchError(this.handleError<any>('list clients'))
+  getIssues(): Observable<any> {
+    return this.http.get(endpoint + 'issue/issues').pipe(
+     catchError(this.handleError<any>('list Issues'))
    );
    }
+
+   getServices(): Observable<any> {
+    return this.http.get(endpoint + 'service/services').pipe(
+     catchError(this.handleError<any>('list Services'))
+   );
+   }
+
+   addIssue (issue): Observable<any> {
+    console.log(issue);
+    return this.http.post<any>(endpoint + '/issue/add', JSON.stringify(issue), httpOptions).pipe(
+      tap((issue) => console.log('added issue')),
+      catchError(this.handleError<any>('addIssue'))
+    );
+  }
+
+  getNotes(): Observable<any> {
+    return this.http.get(endpoint + 'note/notes').pipe(
+     catchError(this.handleError<any>('list Notes'))
+   );
+   }
+
+   addNote(note): Observable<any> {
+    console.log(note);
+    return this.http.post<any>(endpoint + '/note/add', JSON.stringify(note), httpOptions).pipe(
+      tap((note) => console.log('added note')),
+      catchError(this.handleError<any>('addNote'))
+    );
+  }
   
 }

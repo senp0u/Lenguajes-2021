@@ -2,16 +2,9 @@ table {
     width: 100%;
   }
 
-  section {
-    display: table;
-  }
   #button-row {
     display: table-cell;
     width: 490px;
-  }
-
-  #button-add {
-    margin-left: 50px;
   }
 
   #line h1 {
@@ -23,4 +16,15 @@ table {
     margin-right: 25px;
   }
 
-  
+  .margin {
+    margin-left: 50px;
+  }
+
+  textarea {
+    resize: none;
+    height: 150px;
+  }
+
+  #btn-margin {
+    margin-left: 100px;
+  }

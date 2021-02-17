@@ -1,23 +1,23 @@
+//General
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule } from '@angular/common/http';
 import {RouterModule, Routes } from '@angular/router'; 
-
-// Sign In and Sign Up
-import { SignInComponent } from './sign-in/sign-in.component';
-import {MatCardModule} from '@angular/material/card';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+//Components
+import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { IssuesComponent } from './issues/issues.component';
+import { IssueDetailComponent } from './issue-detail/issue-detail.component';
 
-// Issues
+//Angular Material
+import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
-import { IssueDetailComponent } from './issue-detail/issue-detail.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
@@ -41,7 +41,7 @@ const appRoutes: Routes = [
   {
     path: 'issue-detail',
     component: IssueDetailComponent,
-    data: { title: 'Issues Details' }
+    data: { title: 'Issue Detail' }
   },
   {
     path: '',
