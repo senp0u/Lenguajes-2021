@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from '../rest.service';
-import {MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +13,7 @@ export class SignUpComponent implements OnInit {
   clientForm: FormGroup;
   errorMessage: any;
 
-  constructor(public rest:RestService, public dialog: MatDialog, private fb: FormBuilder, private route: ActivatedRoute,
+  constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
     private router: Router) {
     
 
