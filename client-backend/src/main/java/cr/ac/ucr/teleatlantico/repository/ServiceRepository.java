@@ -8,4 +8,6 @@ import cr.ac.ucr.teleatlantico.domain.Service;
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Integer>{
 
+
+
 }

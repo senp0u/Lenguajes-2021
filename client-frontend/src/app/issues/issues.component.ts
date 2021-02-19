@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { RestService } from '../rest.service';
@@ -10,28 +10,28 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   templateUrl: './issues.component.html',
   styleUrls: ['./issues.component.css']
 })
-export class IssuesComponent implements AfterViewInit {
+export class IssuesComponent implements OnInit {
 
   issueForm: FormGroup;
   errorMessage: any;
-  displayedColumns: string[] = ['issueId', 'servicet', 'status', 'supporterUser', 'descripIssue', 'query'];
+  displayedColumns: string[] = ['issueId', 'service', 'status', 'supporterUser', 'description', 'query'];
   dataSource = new MatTableDataSource<any>();
   element:any=[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  service:any=[];
+  services:any=[];
+  client:any;
 
 
   constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
-    private router: Router) {
-    
-
+    private router: Router, private changeDetectorRefs: ChangeDetectorRef) {
+ 
       this.issueForm = this.fb.group({
         issueId: 0,
         description: new FormControl('', [
           Validators.required,
           Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ\\s]{10,100}$')
         ]),
-        services: new FormControl('', [
+        service: new FormControl('', [
           Validators.required
         ]),
         status: "Ingresado",
@@ -43,30 +43,26 @@ export class IssuesComponent implements AfterViewInit {
     })
 
 }
-  
-
-  ngAfterViewInit() {
+ngOnInit() {
+    this.rest.getClientByEmail(this.route.snapshot.queryParamMap.get('email')).subscribe((data: {}) => {
+    this.client = data;
     this.dataSource.paginator = this.paginator;
     this.getIssues();
-  }
-
+    this.getServices();
+  });
+}
+   
   getIssues(){
     this.element=[];
-    this.rest.getIssues().subscribe((data:{})=>{
-    this.element=data;
+    this.element=this.client.issues;
     this.dataSource.data=(this.element)
-    console.log(this.element);
-
-    });
   }
 
-  getServices(){
-    this.service=[];
-    this.rest.getServices().subscribe((data:{})=>{
-    this.service=data;
-    this.dataSource.data=(this.service)
-    console.log(this.service);
 
+  getServices(){
+    this.services=[];
+    this.rest.getServices().subscribe((data:{})=>{
+    this.services=data;
     });
   }
 
@@ -76,11 +72,29 @@ export class IssuesComponent implements AfterViewInit {
       return;
     }
     
-    this.rest.addIssue(this.issueForm.value).subscribe((result) => {
-      this.router.navigate(['/issues']);
+    
+    let issue = this.issueForm.value;
+    console.log(this.issueForm.value.service.serviceId);
+    issue.createBy = this.client.clientId+"-"+this.client.name;
+    issue.createAt = new Date();
+    this.client.issues.push(issue);
+
+    this.rest.addIssue(this.client).subscribe((result) => {
+      this.refresh();
     }, (err) => {
       console.log(err);
     });
     
+  }
+
+  refresh(){
+    this.rest.getIssues(this.client.clientId).subscribe((result) => {
+      this.client.issues = result;
+      this.element=this.client.issues;
+      this.dataSource.data=(this.element);
+      this.changeDetectorRefs.detectChanges();
+    }, (err) => {
+      console.log(err);
+    });
   }
 }
