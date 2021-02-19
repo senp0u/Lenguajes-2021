@@ -48,7 +48,7 @@ public class ClientController {
 	public ResponseEntity<Client> add(@RequestBody Client client) {
 		client.setCreateAt(new Date());
 		client.setModifyAt(null);
-		client.setCreateBy("To do");
+		client.setCreateBy(client.getClientId()+"-"+client.getName());
 		try {
 			service.save(client);
 			return new ResponseEntity<Client>(client, HttpStatus.OK);
