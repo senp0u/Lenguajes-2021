@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cr.ac.ucr.teleatlantico.domain.Issue;
 import cr.ac.ucr.teleatlantico.repository.IssueRepository;
 
 @Service
@@ -14,5 +15,11 @@ public class IssueService {
 	@Autowired
 	private IssueRepository repository;
 	
-	
+	public Issue getIssueByClientId(int id) {
+		return repository.getIssueByIdClient(id);
+	}
+
+	public Issue save(Issue issue) {
+		return repository.save(issue);
+	}
 }
