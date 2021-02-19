@@ -1,5 +1,8 @@
 package cr.ac.ucr.teleatlantico.domain;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,7 +51,7 @@ public class Client {
 	@Column(name = "Email", unique = true, nullable = false ,length = 30)
 	private String email;
 	
-	@Column(name = "Password", unique = false, nullable = false ,length = 50)
+	@Column(name = "Password", unique = false, nullable = false ,length = 100)
 	private String password;
 	
 	@Column(name = "CreateBy", unique = false, nullable = false ,length = 25)
@@ -108,6 +111,11 @@ public class Client {
 		this.createAt = new Date();
 		this.modifyBy = "";
 		this.modifyAt = new Date();
+	}
+
+	public void encryptPassword() {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+		this.password = passwordEncoder.encode(this.password);
 	}
 
 	public int getClientId() {

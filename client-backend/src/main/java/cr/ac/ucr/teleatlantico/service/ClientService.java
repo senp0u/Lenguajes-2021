@@ -23,6 +23,7 @@ public class ClientService {
 	}
 
 	public Client save(Client client) {
+		client.encryptPassword();
 		return repository.save(client);
 	}
 	
@@ -38,5 +39,9 @@ public class ClientService {
 
 	public void delete(int id) {
 		repository.deleteById(id);
+	}
+	
+	public Client getXXClientByEmail(String email) {
+		return repository.findByEmail(email);
 	}
 }

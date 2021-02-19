@@ -1,0 +1,44 @@
+table {
+  width: 100%;
+}
+
+#button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+#line h1 {
+  text-align: center;
+}
+
+.margin {
+  margin-left: 50px;
+}
+
+textarea {
+  resize: none;
+  height: 150px;
+}
+
+#btn-margin {
+  margin-left: 100px;
+}
+
+#home {
+  text-align: right;
+  margin-right: 25px;
+}
+
+.main-div{
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.example-card {
+  background: rgb(196, 157, 241);
+  width: 500px;
+  text-align: center;
+}
+
