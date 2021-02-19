@@ -6,7 +6,7 @@
   }
 
   .example-card {
-    background: rgb(170, 169, 169);
+    background: #CEE7FF;
     width: 500px;
     text-align: center;
   }
@@ -17,6 +17,5 @@
   }
 
   body {
-    
-    background: rgb(19, 86, 141);
+    background: url(../images/redes.jpg);
 }

@@ -21,6 +21,12 @@ export class RestService {
       'Authorization' : this.token
     });
   }
+
+  private extractData(res: Response){
+    let body = res;
+    return body || {};
+
+  }
   
   login(email: string, password: string): Observable<any> {
     let params = new HttpParams();
@@ -32,9 +38,14 @@ export class RestService {
         response => {
           this.token = response.headers.get('Authorization');
           console.log(this.getHeaders());
-      }
-        
-        ));
+      }));
+  }
+
+  getClientByEmail(email): Observable<any> {
+    return this.http.get(endpoint + 'client/get/email/'+email).pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('getClient'))
+    );
   }
 
   addClient(client): Observable<any> {
