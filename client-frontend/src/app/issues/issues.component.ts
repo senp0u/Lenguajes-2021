@@ -80,20 +80,10 @@ ngOnInit() {
     this.client.issues.push(issue);
 
     this.rest.addIssue(this.client).subscribe((result) => {
-      this.refresh();
+      this.ngOnInit();
     }, (err) => {
       console.log(err);
     });
     
-  }
-
-  refresh(){
-    this.rest.getIssues(this.client.clientId).subscribe((result) => {
-      this.client.issues = result;
-      this.element=this.client.issues;
-      this.dataSource.data=(this.element);
-    }, (err) => {
-      console.log(err);
-    });
   }
 }
