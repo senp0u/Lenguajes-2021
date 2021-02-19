@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import cr.ac.ucr.teleatlantico.domain.Issue;
 import cr.ac.ucr.teleatlantico.repository.IssueRepository;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class IssueService {
@@ -15,11 +17,13 @@ public class IssueService {
 	@Autowired
 	private IssueRepository repository;
 	
-	public Issue getIssueByClientId(int id) {
-		return repository.getIssueByIdClient(id);
-	}
+
 
 	public Issue save(Issue issue) {
 		return repository.save(issue);
+	}
+
+	public List<Issue> getIssueByClientId(int id) {
+		return repository.getIssueByIdClient(id);
 	}
 }

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { RestService } from '../rest.service';
@@ -23,7 +23,7 @@ export class IssuesComponent implements OnInit {
 
 
   constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
-    private router: Router, private changeDetectorRefs: ChangeDetectorRef) {
+    private router: Router) {
  
       this.issueForm = this.fb.group({
         issueId: 0,
@@ -92,7 +92,6 @@ ngOnInit() {
       this.client.issues = result;
       this.element=this.client.issues;
       this.dataSource.data=(this.element);
-      this.changeDetectorRefs.detectChanges();
     }, (err) => {
       console.log(err);
     });
