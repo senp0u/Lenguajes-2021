@@ -1,6 +1,7 @@
 package cr.ac.ucr.teleatlantico.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,12 @@ public class IssueController {
 	private IssueService service;
 
 	@GetMapping("/client/{id}")
-	public ResponseEntity<Issue> getIssueByClientId(@PathVariable Integer id) {
+	public ResponseEntity<List<Issue>> getIssueByClientId(@PathVariable Integer id) {
 		try {
-			Issue issue = service.getIssueByClientId(id);
-			return new ResponseEntity<Issue>(issue, HttpStatus.OK);
+			List<Issue> issues = service.getIssueByClientId(id);
+			return new ResponseEntity<List<Issue>>(issues, HttpStatus.OK);
 		} catch (NoSuchElementException e) {
-			return new ResponseEntity<Issue>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<Issue>>(HttpStatus.NOT_FOUND);
 		}
 	}
 	
