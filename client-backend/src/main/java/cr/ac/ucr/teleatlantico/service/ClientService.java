@@ -44,4 +44,8 @@ public class ClientService {
 	public Client getXXClientByEmail(String email) {
 		return repository.findByEmail(email);
 	}
+
+	public Client get(String email) {
+		return repository.findByEmail(email);
+	}
 }

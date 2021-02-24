@@ -68,3 +68,4 @@
 /client-backend/.vscode/
 /Documentos/Domain/.client-domain.vpp.lck
 /Documentos/Domain/*.vpp.*
+/client-frontend/node_modules/*

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
@@ -8,24 +8,120 @@ const endpoint = 'http://localhost:8080/api';
 @Injectable({
   providedIn: 'root'
 })
+
 export class RestService {
 
-  result: string;
+  token: string = '';
+
   constructor(private http: HttpClient) { }
-  
+
+  getHeaders() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization' : this.token
+    });
+  }
+
   private extractData(res: Response){
     let body = res;
     return body || {};
 
   }
-
+  
   login(email: string, password: string): Observable<any> {
-    console.log(endpoint+"/login");
     let params = new HttpParams();
+    let headers = new Headers();
     params.append("email", email);
     params.append("password", password);
-    return this.http.post<any>(endpoint+'/login?email='+email+'&password='+password, 
-    {"email": email, "password": password},{observe:"response"});
+    return this.http.post<any>(endpoint + '/login?email=' + email + '&password=' + password,
+      { "email": email, "password": password }, { observe: "response" }).pipe(tap(
+        response => {
+          this.token = response.headers.get('Authorization');
+      }));
   }
-  
+
+  getClientByEmail(email): Observable<any> {
+    const httpOptions = {
+      headers: this.getHeaders()
+    };
+    return this.http.get(endpoint + '/client/get/'+email, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('getClient'))
+    );
+  }
+
+  addClient(client): Observable<any> {
+    console.log(client);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<any>(endpoint + '/client/add', JSON.stringify(client), httpOptions).pipe(
+      tap((client) => console.log('added client')),
+      catchError(this.handleError<any>('addClient'))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+
+      console.log(`${operation} failed: ${error.message}`);
+
+      return of(result as T);
+    }
+
+  }
+
+  getIssues(clientId): Observable<any> {
+    const httpOptions = {
+      headers: this.getHeaders()
+    };
+    console.log(clientId);
+    return this.http.get(endpoint + '/issue/client/'+clientId, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('list Issues'))
+    );
+  }
+
+
+  getServices(): Observable<any> {
+    const httpOptions = {
+      headers: this.getHeaders()
+    };
+    return this.http.get(endpoint + '/service/get', httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('list Services'))
+    );
+  }
+
+  addIssue(client): Observable<any> {
+    console.log(client);
+    const httpOptions = {
+      headers: this.getHeaders()
+    };
+    return this.http.post<any>(endpoint + '/client/addIssue', JSON.stringify(client), httpOptions).pipe(
+      tap((client) => console.log('added issue')),
+      catchError(this.handleError<any>('addIssue'))
+    );
+  }
+
+  getNotes(): Observable<any> {
+    return this.http.get(endpoint + '/note/notes').pipe(
+      catchError(this.handleError<any>('list Notes'))
+    );
+  }
+
+  addNote(note): Observable<any> {
+    const httpOptions = {
+      headers: this.getHeaders()
+    };
+    console.log(note);
+    return this.http.post<any>(endpoint + '/note/add', JSON.stringify(note), httpOptions).pipe(
+      tap((note) => console.log('added note')),
+      catchError(this.handleError<any>('addNote'))
+    );
+  }
+
 }

@@ -48,7 +48,7 @@ public class Issue {
 	private Date modifyAt;
 	
 	@ManyToOne(targetEntity = Service.class,fetch = FetchType.EAGER,
-			   cascade = CascadeType.ALL, optional=false)
+			   cascade = CascadeType.PERSIST, optional=false)
 	@JoinColumn(name = "ServiceId", referencedColumnName = "ServiceId",nullable = false)
 	private Service service;
 	

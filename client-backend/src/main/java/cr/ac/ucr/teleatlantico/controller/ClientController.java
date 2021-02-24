@@ -44,11 +44,21 @@ public class ClientController {
 		}
 	}
 	
+	@GetMapping("/get/{email}")
+	public ResponseEntity<Client> get(@PathVariable String email) {
+		try {
+			Client client = service.get(email);
+			return new ResponseEntity<Client>(client, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	@PostMapping(value="/add", consumes="application/json")
 	public ResponseEntity<Client> add(@RequestBody Client client) {
 		client.setCreateAt(new Date());
 		client.setModifyAt(null);
-		client.setCreateBy("To do");
+		client.setCreateBy(client.getFirstSurname()+"-"+client.getName());
 		try {
 			service.save(client);
 			return new ResponseEntity<Client>(client, HttpStatus.OK);
@@ -57,11 +67,9 @@ public class ClientController {
 		}
 	}
 
-	@PutMapping("/update")
-	public ResponseEntity<Client> update(@RequestBody Client client) {
+	@PostMapping("/addIssue")
+	public ResponseEntity<Client> addIssue(@RequestBody Client client) {
 		try {
-			client.setModifyAt(new Date());
-			client.setModifyBy("To do");
 			service.update(client);
 			return new ResponseEntity<Client>(client, HttpStatus.OK);
 		} catch (NoSuchElementException e) {
