@@ -12,25 +12,28 @@ export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
   errorMessage: any;
+  showMsgError: boolean = false;
+  showMsgRegistration: boolean = false;
 
   constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
-    private router: Router) {
-    
-
-      this.loginForm = this.fb.group({
-        email: new FormControl('', [
-          Validators.required,
-          Validators.email
-        ]),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]{5,15}$')
-        ])
-    })
-
-}
+    private router: Router) {}
 
   ngOnInit(): void {
+
+    if(this.route.snapshot.queryParamMap.get('showMsgRegistration')){
+      this.showMsgRegistration= true;
+    }
+
+    this.loginForm = this.fb.group({
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]{5,15}$')
+      ])
+  })
   }
 
   login() {
@@ -40,12 +43,10 @@ export class SignInComponent implements OnInit {
     }
     
     this.rest.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((result) => {
-      let email = this.loginForm.value.email;
         this.router.navigate(['/issues']);
-      
-
     }, (err) => {
-      console.log(err);
+      this.showMsgError= true;
+      this.showMsgRegistration= false;
     });
     
   }

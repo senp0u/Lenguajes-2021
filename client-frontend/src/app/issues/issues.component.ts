@@ -19,7 +19,8 @@ export class IssuesComponent implements OnInit {
   element:any=[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   services:any=[];
-
+  showMsgError: boolean = false;
+  showMsgRegistration: boolean = false;
 
   constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
     private router: Router) {
@@ -69,10 +70,17 @@ ngOnInit() {
       console.log(result);
       this.element.push(result);
       this.getIssues();
-      this.issueForm.reset();
+      this.showMsgError= false;
+      this.showMsgRegistration= true;
     }, (err) => {
-      console.log(err);
+      this.showMsgError= true;
+      this.showMsgRegistration= false;
     });
-    
+   
   }
+
+  logout() {
+    this.rest.logout();
+  }
+
 }
