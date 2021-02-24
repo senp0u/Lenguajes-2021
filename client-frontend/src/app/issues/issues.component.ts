@@ -24,7 +24,9 @@ export class IssuesComponent implements OnInit {
 
   constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
     private router: Router) {
- 
+      if(!rest.isLoggedIn()){
+        this.router.navigate(['/sign-in']);
+      }
       this.issueForm = this.fb.group({
         issueId: 0,
         description: new FormControl('', [
@@ -44,8 +46,8 @@ export class IssuesComponent implements OnInit {
 
 }
 ngOnInit() {
-    this.rest.getClientByEmail(this.route.snapshot.queryParamMap.get('email')).subscribe((data: {}) => {
-    this.client = data;
+    this.rest.getClientByEmail().subscribe((data: {}) => {
+    this.element = data;
     this.dataSource.paginator = this.paginator;
     this.getIssues();
     this.getServices();
@@ -53,8 +55,7 @@ ngOnInit() {
 }
    
   getIssues(){
-    this.element=[];
-    this.element=this.client.issues;
+    
     this.dataSource.data=(this.element)
   }
 

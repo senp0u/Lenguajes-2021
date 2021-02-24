@@ -1,5 +1,6 @@
 package cr.ac.ucr.teleatlantico.controller;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cr.ac.ucr.teleatlantico.domain.Client;
@@ -44,15 +46,6 @@ public class ClientController {
 		}
 	}
 	
-	@GetMapping("/get/{email}")
-	public ResponseEntity<Client> get(@PathVariable String email) {
-		try {
-			Client client = service.get(email);
-			return new ResponseEntity<Client>(client, HttpStatus.OK);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
-		}
-	}
 	
 	@PostMapping(value="/add", consumes="application/json")
 	public ResponseEntity<Client> add(@RequestBody Client client) {

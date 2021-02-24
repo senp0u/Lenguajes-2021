@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import * as moment from 'moment';
 
 const endpoint = 'http://localhost:8080/api';
 
@@ -18,7 +19,7 @@ export class RestService {
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization' : this.token
+      'Authorization' : localStorage.getItem('id_token')
     });
   }
 
@@ -36,15 +37,17 @@ export class RestService {
     return this.http.post<any>(endpoint + '/login?email=' + email + '&password=' + password,
       { "email": email, "password": password }, { observe: "response" }).pipe(tap(
         response => {
-          this.token = response.headers.get('Authorization');
+          console.log(moment().add(720, "minutes").format('LLL'));
+          localStorage.setItem("expires_at", JSON.stringify(moment().add(720, "minutes")));
+          localStorage.setItem('id_token',  response.headers.get('Authorization'));
       }));
   }
 
-  getClientByEmail(email): Observable<any> {
+  getClientByEmail(): Observable<any> {
     const httpOptions = {
       headers: this.getHeaders()
     };
-    return this.http.get(endpoint + '/client/get/'+email, httpOptions).pipe(
+    return this.http.get(endpoint + '/issue/get/', httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getClient'))
     );
@@ -122,6 +125,21 @@ export class RestService {
       tap((note) => console.log('added note')),
       catchError(this.handleError<any>('addNote'))
     );
+  }
+
+  public isLoggedIn() {
+    return moment().isBefore(this.getExpiration());
+  }
+
+getExpiration() {
+  const expiration = localStorage.getItem("expires_at");
+  const expiresAt = JSON.parse(expiration);
+  return expiresAt;
+  } 
+
+  logout() {
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
   }
 
 }

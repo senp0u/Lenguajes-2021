@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import cr.ac.ucr.teleatlantico.domain.Client;
 import cr.ac.ucr.teleatlantico.domain.Issue;
 
 import java.util.List;
@@ -15,4 +16,7 @@ public interface IssueRepository extends JpaRepository<Issue, Integer>{
 
     @Query(value = "{ call SelectIssueByIdClient(?1)}", nativeQuery = true)
     List<Issue> getIssueByIdClient(@Param("@ClientId") Integer ClientId);
+    
+    @Query(value = "SELECT c FROM Client c JOIN FETCH c.issues i JOIN FETCH i.service WHERE c.email = ?1")
+    Client findByEmail(String email);
 }

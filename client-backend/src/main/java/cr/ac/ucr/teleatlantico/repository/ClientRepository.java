@@ -9,6 +9,6 @@ import cr.ac.ucr.teleatlantico.domain.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer>{
 
-	@Query(value = "SELECT c FROM Client c JOIN FETCH c.issues i JOIN FETCH i.service WHERE c.email = ?1")
+	@Query(value = "SELECT c FROM Client c WHERE c.email = ?1")
 	Client findByEmail(String email);
 }

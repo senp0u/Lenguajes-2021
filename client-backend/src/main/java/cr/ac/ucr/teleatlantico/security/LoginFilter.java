@@ -28,7 +28,6 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter{
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {
-		System.out.println(request.getParameter("email"));
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
