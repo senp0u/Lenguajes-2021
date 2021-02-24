@@ -40,7 +40,10 @@ export class SignInComponent implements OnInit {
     }
     
     this.rest.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((result) => {
-      this.router.navigate(['/sign-up']);
+      let email = this.loginForm.value.email;
+        this.router.navigate(['/issues']);
+      
+
     }, (err) => {
       console.log(err);
     });

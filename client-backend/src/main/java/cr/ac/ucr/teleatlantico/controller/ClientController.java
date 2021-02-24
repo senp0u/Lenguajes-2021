@@ -1,5 +1,6 @@
 package cr.ac.ucr.teleatlantico.controller;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cr.ac.ucr.teleatlantico.domain.Client;
@@ -44,11 +46,12 @@ public class ClientController {
 		}
 	}
 	
+	
 	@PostMapping(value="/add", consumes="application/json")
 	public ResponseEntity<Client> add(@RequestBody Client client) {
 		client.setCreateAt(new Date());
 		client.setModifyAt(null);
-		client.setCreateBy("To do");
+		client.setCreateBy(client.getFirstSurname()+"-"+client.getName());
 		try {
 			service.save(client);
 			return new ResponseEntity<Client>(client, HttpStatus.OK);
@@ -57,17 +60,7 @@ public class ClientController {
 		}
 	}
 
-	@PutMapping("/update")
-	public ResponseEntity<Client> update(@RequestBody Client client) {
-		try {
-			client.setModifyAt(new Date());
-			client.setModifyBy("To do");
-			service.update(client);
-			return new ResponseEntity<Client>(client, HttpStatus.OK);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
-		}
-	}
+	
 
 	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable int id) {
