@@ -21,6 +21,12 @@ export class RestService {
       'Authorization' : this.token
     });
   }
+
+  private extractData(res: Response){
+    let body = res;
+    return body || {};
+
+  }
   
   login(email: string, password: string): Observable<any> {
     let params = new HttpParams();
@@ -31,10 +37,17 @@ export class RestService {
       { "email": email, "password": password }, { observe: "response" }).pipe(tap(
         response => {
           this.token = response.headers.get('Authorization');
-          console.log(this.getHeaders());
-      }
-        
-        ));
+      }));
+  }
+
+  getClientByEmail(email): Observable<any> {
+    const httpOptions = {
+      headers: this.getHeaders()
+    };
+    return this.http.get(endpoint + '/client/get/'+email, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('getClient'))
+    );
   }
 
   addClient(client): Observable<any> {
@@ -61,25 +74,35 @@ export class RestService {
 
   }
 
-  getIssues(): Observable<any> {
-    return this.http.get(endpoint + '/issue/issues').pipe(
+  getIssues(clientId): Observable<any> {
+    const httpOptions = {
+      headers: this.getHeaders()
+    };
+    console.log(clientId);
+    return this.http.get(endpoint + '/issue/client/'+clientId, httpOptions).pipe(
+      map(this.extractData),
       catchError(this.handleError<any>('list Issues'))
     );
   }
 
+
   getServices(): Observable<any> {
-    return this.http.get(endpoint + '/service/services').pipe(
+    const httpOptions = {
+      headers: this.getHeaders()
+    };
+    return this.http.get(endpoint + '/service/get', httpOptions).pipe(
+      map(this.extractData),
       catchError(this.handleError<any>('list Services'))
     );
   }
 
-  addIssue(issue): Observable<any> {
-    console.log(issue);
+  addIssue(client): Observable<any> {
+    console.log(client);
     const httpOptions = {
       headers: this.getHeaders()
     };
-    return this.http.post<any>(endpoint + '/issue/add', JSON.stringify(issue), httpOptions).pipe(
-      tap((issue) => console.log('added issue')),
+    return this.http.post<any>(endpoint + '/client/addIssue', JSON.stringify(client), httpOptions).pipe(
+      tap((client) => console.log('added issue')),
       catchError(this.handleError<any>('addIssue'))
     );
   }

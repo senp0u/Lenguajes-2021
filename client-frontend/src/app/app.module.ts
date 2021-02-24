@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {HttpClientModule } from '@angular/common/http';
 import {RouterModule, Routes } from '@angular/router'; 
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Components
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule, 
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

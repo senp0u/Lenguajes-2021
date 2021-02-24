@@ -1,5 +1,7 @@
 package cr.ac.ucr.teleatlantico.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ public class IssueService {
 	@Autowired
 	private IssueRepository repository;
 	
-	public Issue getIssueByClientId(int id) {
+	public List<Issue> getIssueByClientId(int id) {
 		return repository.getIssueByIdClient(id);
 	}
 
