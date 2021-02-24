@@ -60,15 +60,7 @@ public class ClientController {
 		}
 	}
 
-	@PostMapping("/addIssue")
-	public ResponseEntity<Client> addIssue(@RequestBody Client client) {
-		try {
-			service.update(client);
-			return new ResponseEntity<Client>(client, HttpStatus.OK);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
-		}
-	}
+	
 
 	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable int id) {

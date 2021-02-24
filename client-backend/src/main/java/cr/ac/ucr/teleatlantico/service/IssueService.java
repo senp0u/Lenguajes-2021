@@ -24,8 +24,9 @@ public class IssueService {
 		return repository.getIssueByIdClient(id);
 	}
 
-	public Issue save(Issue issue) {
-		return repository.save(issue);
+	public Issue save(Issue issue, String clientEmail) {
+		repository.saveSP(issue.getDescription(), issue.getService().getServiceId(), clientEmail);
+		return repository.getLastInsertIssue();
 	}
 
 	public Set<Issue> getByEmail(String email) {
@@ -34,4 +35,6 @@ public class IssueService {
 			return new HashSet<Issue>();
 		return client.getIssues();
 	}
+	
+	
 }
