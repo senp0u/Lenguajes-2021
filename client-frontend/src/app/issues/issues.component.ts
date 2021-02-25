@@ -19,7 +19,6 @@ export class IssuesComponent implements OnInit {
   element:any=[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   services:any=[];
-  client:any;
 
 
   constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
@@ -35,13 +34,7 @@ export class IssuesComponent implements OnInit {
         ]),
         service: new FormControl('', [
           Validators.required
-        ]),
-        status: "Ingresado",
-        supporterUser: "Por definir",
-        createBy: "",
-        createAt: "",
-        modifyBy: "",
-        modifyAt: ""
+        ])
     })
 
 }
@@ -55,8 +48,7 @@ ngOnInit() {
 }
    
   getIssues(){
-    
-    this.dataSource.data=(this.element)
+    this.dataSource.data=(this.element);
   }
 
 
@@ -72,16 +64,12 @@ ngOnInit() {
     if (!this.issueForm.valid) {
       return;
     }
-    
-    
-    let issue = this.issueForm.value;
-    console.log(this.issueForm.value.service.serviceId);
-    issue.createBy = this.client.clientId+"-"+this.client.name;
-    issue.createAt = new Date();
-    this.client.issues.push(issue);
 
-    this.rest.addIssue(this.client).subscribe((result) => {
-      this.ngOnInit();
+    this.rest.addIssue(this.issueForm.value).subscribe((result) => {
+      console.log(result);
+      this.element.push(result);
+      this.getIssues();
+      this.issueForm.reset();
     }, (err) => {
       console.log(err);
     });

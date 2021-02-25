@@ -99,13 +99,12 @@ export class RestService {
     );
   }
 
-  addIssue(client): Observable<any> {
-    console.log(client);
+  addIssue(issue): Observable<any> {
     const httpOptions = {
       headers: this.getHeaders()
     };
-    return this.http.post<any>(endpoint + '/client/addIssue', JSON.stringify(client), httpOptions).pipe(
-      tap((client) => console.log('added issue')),
+    return this.http.post<any>(endpoint + '/issue/addIssue', JSON.stringify(issue), httpOptions).pipe(
+      tap((issue) => console.log('added issue')),
       catchError(this.handleError<any>('addIssue'))
     );
   }

@@ -52,10 +52,10 @@ public class IssueController {
 	}
 	
 	@PostMapping(value = "/addIssue", consumes="application/json")
-	//@ResponseBody
-	public ResponseEntity<Issue> addIssue(@RequestBody Issue issue){ //, Principal principal) {
+	@ResponseBody
+	public ResponseEntity<Issue> addIssue(@RequestBody Issue issue, Principal principal) {
 		try {
-			Issue newIssue = service.save(issue, "sason@gmail.com");//principal.getName());
+			Issue newIssue = service.save(issue, principal.getName());
 			
 			return new ResponseEntity<Issue>(newIssue, HttpStatus.OK);
 		} catch (NoSuchElementException e) {
