@@ -12,7 +12,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { IssuesComponent } from './issues/issues.component';
-import { IssueDetailComponent } from './issue-detail/issue-detail.component';
 
 //Angular Material
 import {MatCardModule} from '@angular/material/card';
@@ -40,11 +39,6 @@ const appRoutes: Routes = [
     data: { title: 'Issues' }
   },
   {
-    path: 'issue-detail',
-    component: IssueDetailComponent,
-    data: { title: 'Issue Detail' }
-  },
-  {
     path: '',
     redirectTo: '/sign-in',
     pathMatch: 'full'
@@ -57,8 +51,7 @@ const appRoutes: Routes = [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    IssuesComponent,
-    IssueDetailComponent
+    IssuesComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

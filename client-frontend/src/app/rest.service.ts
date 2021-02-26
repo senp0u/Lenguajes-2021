@@ -54,16 +54,13 @@ export class RestService {
   }
 
   addClient(client): Observable<any> {
-    console.log(client);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
     return this.http.post<any>(endpoint + '/client/add', JSON.stringify(client), httpOptions).pipe(
-      tap((client) => console.log('added client')),
-      catchError(this.handleError<any>('addClient'))
-    );
+      tap((client) => console.log('added client')));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -104,8 +101,7 @@ export class RestService {
       headers: this.getHeaders()
     };
     return this.http.post<any>(endpoint + '/issue/addIssue', JSON.stringify(issue), httpOptions).pipe(
-      tap((issue) => console.log('added issue')),
-      catchError(this.handleError<any>('addIssue'))
+      tap((issue) => console.log('added issue'))
     );
   }
 
@@ -136,9 +132,8 @@ getExpiration() {
   return expiresAt;
   } 
 
-  logout() {
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
-  }
-
+logout() {
+  localStorage.removeItem("id_token");
+  localStorage.removeItem("expires_at");
+}
 }
