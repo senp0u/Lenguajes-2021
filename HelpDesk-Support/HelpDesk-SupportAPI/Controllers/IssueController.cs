@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HelpDesk_SupportAPI.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace HelpDesk_SupportAPI.Controllers
 {
     [Route("api/[controller]")]
+    [AllowAnonymous]
     [ApiController]
     public class IssueController : ControllerBase
     {
@@ -93,13 +96,22 @@ namespace HelpDesk_SupportAPI.Controllers
         // POST: api/Issue
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+       // [EnableCors("AllPolicy")]
         [HttpPost]
-        public async Task<ActionResult<Issue>> PostIssue(Issue issue)
+        public async Task<ActionResult<Boolean>> PostIssue([FromBody]Issue issue)
         {
-            _context.Issue.Add(issue);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetIssue", new { id = issue.ReportNumber }, issue);
+            try
+            {
+                issue.CreateDate = DateTime.Now;
+                issue.ReportDate = DateTime.Now;
+                _context.Issue.Add(issue);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(false); ;
+            }
+            return Ok(true);
         }
 
         // DELETE: api/Issue/5

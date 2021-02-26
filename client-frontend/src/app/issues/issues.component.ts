@@ -14,13 +14,13 @@ export class IssuesComponent implements OnInit {
 
   issueForm: FormGroup;
   errorMessage: any;
-  displayedColumns: string[] = ['issueId', 'service', 'status', 'supporterUser', 'description', 'query'];
+  displayedColumns: string[] = ['issueId', 'service', 'status', 'supporterUser', 'description'];
   dataSource = new MatTableDataSource<any>();
   element:any=[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   services:any=[];
-  client:any;
-
+  showMsgError: boolean = false;
+  showMsgRegistration: boolean = false;
 
   constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
     private router: Router) {
@@ -35,13 +35,7 @@ export class IssuesComponent implements OnInit {
         ]),
         service: new FormControl('', [
           Validators.required
-        ]),
-        status: "Ingresado",
-        supporterUser: "Por definir",
-        createBy: "",
-        createAt: "",
-        modifyBy: "",
-        modifyAt: ""
+        ])
     })
 
 }
@@ -55,8 +49,7 @@ ngOnInit() {
 }
    
   getIssues(){
-    
-    this.dataSource.data=(this.element)
+    this.dataSource.data=(this.element);
   }
 
 
@@ -72,19 +65,22 @@ ngOnInit() {
     if (!this.issueForm.valid) {
       return;
     }
-    
-    
-    let issue = this.issueForm.value;
-    console.log(this.issueForm.value.service.serviceId);
-    issue.createBy = this.client.clientId+"-"+this.client.name;
-    issue.createAt = new Date();
-    this.client.issues.push(issue);
 
-    this.rest.addIssue(this.client).subscribe((result) => {
-      this.ngOnInit();
+    this.rest.addIssue(this.issueForm.value).subscribe((result) => {
+      console.log(result);
+      this.element.push(result);
+      this.getIssues();
+      this.showMsgError= false;
+      this.showMsgRegistration= true;
     }, (err) => {
-      console.log(err);
+      this.showMsgError= true;
+      this.showMsgRegistration= false;
     });
-    
+   
   }
+
+  logout() {
+    this.rest.logout();
+  }
+
 }
