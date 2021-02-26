@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using HelpDesk_SupportAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using System.Net.Http;
+using HelpDesk_SupportAPI.DTO;
 
 namespace HelpDesk_SupportAPI.Controllers
 {
@@ -18,6 +20,7 @@ namespace HelpDesk_SupportAPI.Controllers
     {
         private readonly DB_A6E1ED_lenguajesContext _context;
 
+        readonly string url = "http://localhost:8080/api";
         public IssueController()
         {
             _context = new DB_A6E1ED_lenguajesContext();
@@ -76,7 +79,7 @@ namespace HelpDesk_SupportAPI.Controllers
             return NoContent();
         }
 
-        //PUT: api/Issue/issue=#&employee=#
+        //PUT: api/Issue/
         [HttpPut]
         public IActionResult PutAssignEmployee(Issue issue)
         {
@@ -86,11 +89,9 @@ namespace HelpDesk_SupportAPI.Controllers
                                 issue.EmployeeId,
                                 issue.SupervisorId);
             if (result == 0)
-            {
                 throw new OperationCanceledException();
-            }
-
-            return Ok(result);
+            
+            return NoContent();
         }
 
         // POST: api/Issue
@@ -102,8 +103,6 @@ namespace HelpDesk_SupportAPI.Controllers
         {
             try
             {
-                issue.CreateDate = DateTime.Now;
-                issue.ReportDate = DateTime.Now;
                 _context.Issue.Add(issue);
                 await _context.SaveChangesAsync();
             }

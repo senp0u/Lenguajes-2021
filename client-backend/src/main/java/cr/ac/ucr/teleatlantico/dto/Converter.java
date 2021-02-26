@@ -11,7 +11,7 @@ public class Converter {
 					0,
 					issue.getDescription(),
 					issue.getStatus(),
-					"Null",
+					"Bajo",
 					issue.getService().getServiceId(),
 					null,
 					issue.getIssueId(),
