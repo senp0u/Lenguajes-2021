@@ -17,14 +17,14 @@ namespace HelpDesk_SupportAPI.Models
         public int ReportNumber { get; set; }
         public string Classification { get; set; }
         public string Status { get; set; }
-        public DateTime ReportDate { get; set; }
+        public DateTime? ReportDate { get; set; }
         public string ResolutionComment { get; set; }
         public int? EmployeeId { get; set; }
         public int? SupervisorId { get; set; }
         public int ServiceId { get; set; }
         public int CreateBy { get; set; }
         public int? ModifyBy { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         public DateTime? ModifyDate { get; set; }
 
         public virtual Employee Employee { get; set; }

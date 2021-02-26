@@ -8,7 +8,6 @@
 
 $(document).ready(function () {
     LoadData();
-    GetServices();
     GetSupervisor();
 });
 
@@ -144,12 +143,6 @@ function GetSupervisor() {
 
 function AddEmployee() {
 
-    document.getElementById('name').value = '';
-    document.getElementById('first-surname').value = '';
-    document.getElementById('second-surname').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('password').value = '';
-
     let isSupervisor = false;
     var ServiceList = [{
         //employeeId = 2
@@ -168,11 +161,11 @@ function AddEmployee() {
         firstSurname: $('#first-surname').val(),
         secondSurname: $('#second-surname').val(),
         email: $('#email').val(),
-        supervisorId:3,
+        supervisorId: parseInt(document.getElementById('id-employee').value),
         isSupervisor: isSupervisor,
         employeeServices: ServiceList,
         password: $('#password').val(),
-        createBy: 3,
+        createBy: parseInt(document.getElementById('id-employee').value),
         createDate: "2004-05-23T14:25:10"
 
     };

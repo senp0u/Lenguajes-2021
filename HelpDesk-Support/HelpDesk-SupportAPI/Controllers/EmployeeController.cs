@@ -133,7 +133,6 @@ namespace HelpDesk_SupportAPI.Controllers
             return employee;
             }catch (AggregateException)
             {
-
                 throw;
             }
         }
