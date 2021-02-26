@@ -35,6 +35,10 @@ public class IssueService {
 			return new HashSet<Issue>();
 		return client.getIssues();
 	}
+
+	public void delete(int issueId) {
+		repository.deleteById(issueId);
+	}
 	
 	
 }
