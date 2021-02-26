@@ -1,0 +1,116 @@
+<body>
+    <div class="main-div">
+    <mat-card class="example-card">
+        <mat-card-title>Registrarse</mat-card-title><br>
+        <div class="row"  *ngIf="showMsgError">
+          <p class="alert alert-danger">
+            <strong>Error: </strong>Problemas al registrar, vuelva a intentar.
+          </p>
+      </div>
+        <mat-card-content>
+            <form [formGroup]="clientForm" (ngSubmit)="add()" #formDir="ngForm">
+                <div class="form-group row">
+                    <div class="margin">
+                      <input class="form-control" type="text" formControlName="name" placeholder="Nombre" autocomplete="off">
+                    </div>
+                    <span class="text-danger" *ngIf="clientForm.hasError('required', 'name') && formDir.submitted">
+                      El nombre es requerido.
+                    </span>
+                    <span class="text-danger" *ngIf="clientForm.hasError('pattern', 'name') && formDir.submitted">
+                        Se permiten solo letras. El rango es de 3 a 25 letras. 
+                      </span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="margin">
+                      <input class="form-control" type="text" formControlName="firstSurname" placeholder="Primer Apellido" autocomplete="off">
+                    </div>
+                    <span class="text-danger" *ngIf="clientForm.hasError('required', 'firstSurname') && formDir.submitted">
+                      El primer apellido es requerido.
+                    </span>
+                    <span class="text-danger" *ngIf="clientForm.hasError('pattern', 'firstSurname') && formDir.submitted">
+                        Se permiten solo letras. El rango es de 3 a 20 letras. 
+                      </span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="margin">
+                      <input class="form-control" type="text" formControlName="secondSurname" placeholder="Segundo Apellido" autocomplete="off">
+                    </div>
+                    <span class="text-danger" *ngIf="clientForm.hasError('required', 'secondSurname') && formDir.submitted">
+                      El segundo apellido es requerido.
+                    </span>
+                    <span class="text-danger" *ngIf="clientForm.hasError('pattern', 'secondSurname') && formDir.submitted">
+                        Se permiten solo letras. El rango es de 3 a 20 letras. 
+                      </span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="margin">
+                      <input class="form-control" type="text" formControlName="address" placeholder="Dirección" autocomplete="off">
+                    </div>
+                    <span class="text-danger" *ngIf="clientForm.hasError('required', 'address') && formDir.submitted">
+                      La dirección es requerida.
+                    </span>
+                    <span class="text-danger" *ngIf="clientForm.hasError('pattern', 'address') && formDir.submitted">
+                        Se permiten letras y números solamente. El rango es de 10 a 40 dígitos. 
+                      </span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="margin">
+                      <input class="form-control" type="text" formControlName="phone" placeholder="Teléfono 1" autocomplete="off">
+                    </div>
+                    <span class="text-danger" *ngIf="clientForm.hasError('required', 'phone') && formDir.submitted">
+                      El número es requerido.
+                    </span>
+                    <span class="text-danger" *ngIf="clientForm.hasError('pattern', 'phone') && formDir.submitted">
+                        Se permiten números solamente. El rango es de 8 a 15 dígitos. 
+                      </span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="margin">
+                      <input class="form-control" type="text" formControlName="secondContact" placeholder="Teléfono 2" autocomplete="off">
+                    </div>
+                    <span class="text-danger" *ngIf="clientForm.hasError('pattern', 'secondContact') && formDir.submitted">
+                        Se permiten números solamente. El rango es de 8 a 15 dígitos. 
+                      </span>
+                </div>
+
+                  <div class="form-group row">
+                    <div class="margin">
+                      <input class="form-control" type="text" formControlName="email" placeholder="Correo Electrónico" autocomplete="off">
+                    </div>
+                    <span class="text-danger" *ngIf="clientForm.hasError('required', 'email') && formDir.submitted">
+                      El correo es requerido.
+                    </span>
+                    <span class="text-danger" *ngIf="clientForm.hasError('email', 'email') && formDir.submitted">
+                        Es requerido el formato de correo: cliente@ejemplo.com
+                      </span>
+                  </div>
+            
+                  <div class="form-group row">
+                    <div class="margin">
+                      <input class="form-control" type="password" formControlName="password" placeholder="Contraseña" autocomplete="off">
+                    </div>
+                    <span class="text-danger" *ngIf="clientForm.hasError('required', 'password') && formDir.submitted">
+                      La contraseña es requerida.
+                    </span>
+                    <span class="text-danger" *ngIf="clientForm.hasError('pattern', 'password') && formDir.submitted">
+                        Solo se permiten letras y números, con un rango de 5 a 15 dígitos.
+                    </span>
+                  </div>
+              
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-default">Registrarse</button>
+                  </div>
+                  <div class="form-group">
+                    <a href="" [routerLink]="['/sign-in/']" style="color: black;"> Iniciar Sesión </a>
+                  </div>
+            </form>
+            
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </body>

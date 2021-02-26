@@ -49,7 +49,7 @@
                             <li class="scroll-to-section"><a href="#issue">Solicitudes</a></li>
                             @if (@HttpContextAccessor.HttpContext.Session.GetInt32("isSupervisor") != 0)
                             {
-                                <li class="scroll-to-section"><a href="#add-supporter">Soportista(+)</a></li>
+                                <li class="scroll-to-section" id="addSupporter"><a href="#add-supporter">Soportista(+)</a></li>
                             }
                             <li class="scroll-to-section"><a onclick="location.href='@Url.Action("Index", "Employee")'">Cerrar Sesión</a></li>
                         </ul>
@@ -357,18 +357,6 @@
                                 </fieldset>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 col-sm-12" style="margin-top:20px;">
-                        <fieldset>
-                            <label for="service">Servicios asignados:</label>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-10 col-sm-12" style="margin-top:20px;">
-                        <fieldset>
-                            <div class="form-check" id="form-check">
-
-                            </div>
-                        </fieldset>
                     </div>
                     <div class="col-md-4 col-sm-12" style="margin-top:20px;">
                         <button class="submit-btn form-control" id="add-supporter-btn" onclick="AddEmployee()">Registrar</button>
