@@ -14,7 +14,7 @@ export class IssuesComponent implements OnInit {
 
   issueForm: FormGroup;
   errorMessage: any;
-  displayedColumns: string[] = ['issueId', 'service', 'status', 'supporterUser', 'description', 'query'];
+  displayedColumns: string[] = ['issueId', 'service', 'status', 'supporterUser', 'description'];
   dataSource = new MatTableDataSource<any>();
   element:any=[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
