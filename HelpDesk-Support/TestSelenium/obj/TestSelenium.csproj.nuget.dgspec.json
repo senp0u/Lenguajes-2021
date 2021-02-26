@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support-App 2\\Lenguajes-2021\\HelpDesk-Support\\TestSelenium\\TestSelenium.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support-App 2\\Lenguajes-2021\\HelpDesk-Support\\TestSelenium\\TestSelenium.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support-App 2\\Lenguajes-2021\\HelpDesk-Support\\TestSelenium\\TestSelenium.csproj",
+        "projectName": "TestSelenium",
+        "projectPath": "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support-App 2\\Lenguajes-2021\\HelpDesk-Support\\TestSelenium\\TestSelenium.csproj",
+        "packagesPath": "C:\\Users\\Paula\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Paula\\Desktop\\UCR Verano 2021\\Proyecto\\Support-App 2\\Lenguajes-2021\\HelpDesk-Support\\TestSelenium\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Paula\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[3.141.0, )"
+            },
+            "Selenium.WebDriver.ChromeDriver": {
+              "target": "Package",
+              "version": "[88.0.4324.9600, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.112\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

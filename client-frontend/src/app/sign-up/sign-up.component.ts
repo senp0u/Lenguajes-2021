@@ -12,6 +12,7 @@ export class SignUpComponent implements OnInit {
 
   clientForm: FormGroup;
   errorMessage: any;
+  showMsgError: boolean = false;
 
   constructor(public rest:RestService, private fb: FormBuilder, private route: ActivatedRoute,
     private router: Router) {
@@ -68,9 +69,10 @@ export class SignUpComponent implements OnInit {
     }
     
     this.rest.addClient(this.clientForm.value).subscribe((result) => {
-      this.router.navigate(['/sign-in']);
+      let showMsgRegistration = true;
+      this.router.navigate(['/sign-in'], {queryParams: { showMsgRegistration } });
     }, (err) => {
-      console.log(err);
+      this.showMsgError= true;
     });
     
   }
